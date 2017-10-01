@@ -1,0 +1,23 @@
+<h2> Login </h2>
+
+<h4> {{ error }} </h4>
+
+<br>
+<label> Username </label>
+<br>
+<input type="text" name="username" ng-model="user.username" required>
+
+<br>
+<label> Password </label>
+<br>
+<input type="password" name="password" ng-model="user.password" required>
+
+<br>
+<input type="checkbox" name="rememberMe" value="rememberMe" checked> Remember me
+
+<br>
+<button ng-click="logIn(user)"> Log in</button>
+
+<br>
+<a href="#" ng-click="">Forget my password?</a>
+<!--<button ng-click=""> Log in </button> -->

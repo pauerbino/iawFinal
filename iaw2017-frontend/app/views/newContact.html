@@ -1,0 +1,34 @@
+<h2> New Contact </h2>
+
+<br>
+<label> Name </label>
+<input type="text" name="name" ng-model="contact.name">
+
+<br>
+<label> Last Name </label>
+<input type="text" name="name" ng-model="contact.lastName">
+
+<br>
+<label> Username </label>
+<input type="text" name="name" ng-model="contact.username">
+
+<br>
+<label> Email </label>
+<input type="email" name="name" ng-model="contact.email">
+
+<br>
+<label> Phone </label>
+<input type="text" name="name" ng-model="contact.phone">
+
+<!--<div ng-dropdown-multiselect=""
+    options="lists"
+    selected-model="searchSelectAllModel"
+    extra-settings="searchSelectAllSettings">
+</div> -->
+<br>
+<label> Etiquetas </label>
+<div ng-dropdown-multiselect="" options="example1data" selected-model="example1model"></div>
+
+<br>
+<button ng-click="newContact(contact)"> New Contact </button>
+<button ng-click="goBack()"> Back </button>

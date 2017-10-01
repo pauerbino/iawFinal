@@ -1,0 +1,42 @@
+<h2> New Campaign </h2>
+
+<br>
+<label> Title </label>
+<br>
+<input type="text" name="title" ng-model="campaign.title" required>
+
+<br>
+<label> Subject </label>
+<br>
+<input type="text" ng-model="campaign.subject" required>
+
+<br>
+<label> From </label>
+<br>
+<input type="text" ng-model="campaign.from" required>
+
+<br>
+<label> To </label>
+<br>
+<select ng-model="campaign.listId">
+	<option ng-repeat="list in lists" value={{list.id}}>{{list.name}}</option>
+</select>
+
+<br>
+<a href="#!/newList" ng-click="">New List</a>
+
+<br>
+<br>
+<label> Content </label>
+<br>
+<input type="content" ng-model="campaign.content" required>
+
+<br>
+<br>
+<button ng-click="newCampaign(campaign)"> Send</button>
+
+<br>
+<br>
+<button ng-click="goBack()"> Go Back</button>
+
+<br>

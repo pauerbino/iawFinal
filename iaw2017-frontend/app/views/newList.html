@@ -1,0 +1,19 @@
+<h2> New List </h2>
+
+<br>
+<label> List Name </label>
+<input type="text" name="listName" ng-model="list.name">
+
+<br>
+<label> Add Contact </label>
+<input type="text" name="contactName" ng-model="newContact">
+<span class="glyphicon glyphicon-ok" ng-click="addContact()"></span>
+<p ng-show="alert"> The username is not valid </p>
+<ul ng-repeat="contact in list.contacts">
+    <li> {{contact.name}} {{contact.lastName}} <span class="glyphicon glyphicon-remove" ng-click="removeContact(contact.id)"></span></li>
+</ul>
+
+
+<br>
+<button ng-click="saveList()"> Create List </button>
+
