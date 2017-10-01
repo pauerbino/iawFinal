@@ -1,12 +1,12 @@
-// 'use strict';
-// angular.module('iaw2017App')
-//     .service('CampaignService', ["$q", "$timeout", function ($q, $timeout) {
-//         var configurations = {
-//             baseURL: "http://localhost:3000"
-//         };
+'use strict';
+angular.module('iaw2017App')
+    .service('Configuration', [function () {
+        var configurations = {
+            baseURL: "http://localhost:3000/api/v1"
+        };
 
-//         this.getConfiguration = function() {
-//             return configurations;
-//         };
+        this.getConfiguration = function() {
+            return configurations;
+        };
 
-// }]);
+}]);

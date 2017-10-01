@@ -1,6 +1,6 @@
 'use strict';
 angular.module('iaw2017App')
-  .controller('ContactsCtrl', ['$location', '$scope', 'ListService', function ( $location, $scope, ListService) {
+  .controller('ListsCtrl', ['$location', '$scope', 'ListService', function ( $location, $scope, ListService) {
 
     $scope.lists = [];
 
@@ -8,7 +8,6 @@ angular.module('iaw2017App')
         ListService.getLists().then(function (lists){
             $scope.lists = lists;
         });
-        //$scope.lists = ListService.getLists();
     }
 
     initialize();

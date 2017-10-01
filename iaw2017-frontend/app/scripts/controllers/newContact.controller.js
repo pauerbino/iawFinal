@@ -4,6 +4,7 @@ angular.module('iaw2017App')
     function ( $location, $routeParams, $scope, ContactService, ListService) {
 
     $scope.lists = [];
+    $scope.contact = {};
     $scope.searchSelectAllSettings = { enableSearch: true, showSelectAll: true, keyboardControls: true };
     $scope.searchSelectAllModel = [];
     $scope.contacts = [];
@@ -22,18 +23,17 @@ angular.module('iaw2017App')
     initialize();
 
     $scope.newContact = function(contact) {
-        console.log(contact);
-        ContactService.createContact(contact).then(function(result) {
-            if (result){
-                ContactService.getContacts().then(function (contacts){
-                    $scope.contacts = contacts;
-                });
-                $location.path('/myContacts');
-            }
-            else {
-                $location.path('/newContact');
-            }
-        });
+        // ContactService.createContact(contact).then(function(result) {
+        //     if (result){
+        //         ContactService.getContacts().then(function (contacts){
+        //             $scope.contacts = contacts;
+        //         });
+        //         $location.path('/myContacts');
+        //     }
+        //     else {
+        //         $location.path('/newContact');
+        //     }
+        // });
     };
 
   }]);

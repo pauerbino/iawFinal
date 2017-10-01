@@ -1,6 +1,6 @@
 'use strict';
 angular.module('iaw2017App')
-  .controller('RegisterCtrl', ['$location', '$scope', 'UserService', function ( $location, $scope, UserService) {
+  .controller('SigninCtrl', ['$location', '$scope', 'UserService', function ( $location, $scope, UserService) {
 
     $scope.users = [];
     $scope.error = '';

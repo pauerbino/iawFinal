@@ -1,8 +1,8 @@
 'use strict';
 angular.module('iaw2017App')
-    .service('ListService', ['$http', '$q', '$timeout', 'Configuration', function ($http, $q, $timeout, Configuration) {
+    .service('ListService', ['$http', '$q', 'Configuration', function ($http, $q, Configuration) {
         var cache = {
-            lists: []
+            lists: null
         };
         var lists = [
             {
@@ -67,9 +67,10 @@ angular.module('iaw2017App')
 
         this.reset = function() {
             cache = {
-                lists: []
+                lists: null
             };
         };
+
         this.getLists = function() {
             var deferred = $q.defer();
             if (cache.lists) {
@@ -89,26 +90,34 @@ angular.module('iaw2017App')
             return deferred.promise;
         };
 
-        this.getList = function(idList) {
+        this.getList = function(id) {
             var deferred = $q.defer();
-            var result = lists.filter(function (list) {
-                return (list.id === idList);
+
+            $http({
+                method: 'GET',
+                url: Configuration.getConfiguration().baseURL + '/lists/' + id
+            }).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
             });
 
-            $timeout(function() {
-                deferred.resolve(result[0]);
-            }, 500);
-
             return deferred.promise;
-
-          //  return lists.filter(function (list) {
-            //    return (list.id == id)
-            //});
-            //return lists[0];
         };
 
         this.deleteList = function(id) {
+            var deferred = $q.defer();
 
+            $http({
+                method: 'DELETE',
+                url: Configuration.getConfiguration().baseURL + '/lists/' + id
+            }).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+
+            return deferred.promise;
         };
 
         this.deleteContactFromList = function(listId, contactId) {
@@ -117,12 +126,17 @@ angular.module('iaw2017App')
 
         this.saveList = function(list) {
             var deferred = $q.defer();
+            var body = {};
 
-            $timeout(function() {
-                var result = lists.push(list);
-                deferred.resolve(result);
-            }, 500);
-
+            $http({
+                method : 'PUT',
+                url : Configuration.getConfiguration().baseURL + '/lists/' + id,
+                data: body
+            }).then(function(response) {
+                deferred.resolve(response);
+            }).catch(function(response) {
+                deferred.reject(response);
+            });
             return deferred.promise;
         };
 

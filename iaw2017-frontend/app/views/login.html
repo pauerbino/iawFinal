@@ -1,23 +1,30 @@
-<h2> Login </h2>
+<h2 class="align-center"> Log In </h2>
+<div>
+    <p>{{error}}</p>
+    <form class="align-center one-row-form" name="loginForm" novalidate>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group" ng-class="{'has-error':loginForm.username.$invalid && loginForm.$submitted}">
+                    <label for="username"> Username *</label>
+                    <input type="text" class="form-control" name="username" ng-model="user.username" required>
+                    <p ng-show="loginForm.username.$invalid && loginForm.$submitted" class="help-block">Your username is required.</p>
+                </div>
 
-<h4> {{ error }} </h4>
+                <div class="form-group" ng-class="{'has-error':loginForm.password.$invalid && loginForm.$submitted}" >
+                    <label for="password"> Password *</label>
+                    <input type="password" class="form-control" name="password" ng-model="user.password" required>
+                    <p ng-show="loginForm.password.$invalid && loginForm.$submitted" class="help-block">Your password is required</p>
+                </div>
+                <input type="checkbox" name="rememberMe" value="rememberMe" checked> Remember me
 
-<br>
-<label> Username </label>
-<br>
-<input type="text" name="username" ng-model="user.username" required>
+                <div>
+                    <button type="submit" class="btn btn-warning btn-form" ng-click="login(user)"> Log in </button>
+                    <button class="btn btn-default btn-form" ng-click="signin()"> Sign in </button>
+                </div>
+                <a href="#" ng-click="">Forget my password?</a>
 
-<br>
-<label> Password </label>
-<br>
-<input type="password" name="password" ng-model="user.password" required>
+            </div>
+        </div>
+    </form>
+</div>
 
-<br>
-<input type="checkbox" name="rememberMe" value="rememberMe" checked> Remember me
-
-<br>
-<button ng-click="logIn(user)"> Log in</button>
-
-<br>
-<a href="#" ng-click="">Forget my password?</a>
-<!--<button ng-click=""> Log in </button> -->

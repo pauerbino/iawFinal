@@ -19,9 +19,9 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/contacts', {
-        templateUrl: 'views/contacts.html',
-        controller: 'ContactsCtrl',
+      .when('/lists', {
+        templateUrl: 'views/lists.html',
+        controller: 'ListsCtrl',
         controllerAs: 'vm'
       })
       .when('/newList', {
@@ -59,9 +59,9 @@ angular
         controller: 'MyCampaignsCtrl',
         controllerAs: 'vm'
       })
-      .when('/registerMe', {
-        templateUrl: 'views/register.html',
-        controller: 'RegisterCtrl',
+      .when('/signin', {
+        templateUrl: 'views/signin.html',
+        controller: 'SigninCtrl',
         controllerAs: 'vm'
       })
       .when('/home', {

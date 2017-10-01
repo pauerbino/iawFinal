@@ -1,34 +1,48 @@
-<h2> New Contact </h2>
+<h2 class="align-center"> New Contact </h2>
+<div>
+    <form class="align-center form-margin" name="newContactForm" novalidate>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group" ng-class="{'has-error':newContactForm.name.$invalid && newContactForm.$submitted}">
+                    <label for="name"> Name *</label>
+                    <input type="text" class="form-control" name="name" ng-model="contact.name" required>
+                    <p ng-show="newContactForm.name.$invalid && newContactForm.$submitted" class="help-block">Your name is required.</p>
+                </div>
 
-<br>
-<label> Name </label>
-<input type="text" name="name" ng-model="contact.name">
+                <div class="form-group" ng-class="{'has-error':newContactForm.email.$invalid && newContactForm.$submitted}" >
+                    <label for="email"> Email *</label>
+                    <input type="email" class="form-control" name="email" ng-model="contact.email" required>
+                    <p ng-show="newContactForm.email.$invalid && newContactForm.$submitted" class="help-block">Enter a valid email.</p>
+                </div>
 
-<br>
-<label> Last Name </label>
-<input type="text" name="name" ng-model="contact.lastName">
+                <div class="form-group">
+                    <label for="phone"> Phone </label>
+                    <input type="text" class="form-control" name="phone" ng-model="contact.phone">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-warning btn-form" ng-click="newContact(contact)"> Create </button>
+                    <button class="btn btn-default btn-form" ng-click="goBack()"> Back </button>
+                </div>
 
-<br>
-<label> Username </label>
-<input type="text" name="name" ng-model="contact.username">
+            </div>
 
-<br>
-<label> Email </label>
-<input type="email" name="name" ng-model="contact.email">
+            <div class="col-xs-6">
+                <div class="form-group" ng-class="{'has-error':newContactForm.lastName.$invalid && newContactForm.$submitted}">
+                    <label for="lastName"> Last Name *</label>
+                    <input type="text" class="form-control" name="lastName" ng-model="contact.lastName" required>
+                    <p ng-show="newContactForm.lastName.$invalid && newContactForm.$submitted" class="help-block">Your last name is required.</p>
+                </div>
 
-<br>
-<label> Phone </label>
-<input type="text" name="name" ng-model="contact.phone">
+                <div class="form-group" ng-class="{'has-error':newContactForm.username.$invalid && newContactForm.$submitted}">
+                    <label for="username"> Username *</label>
+                    <input type="text" class="form-control" name="username" ng-model="contact.username" required>
+                    <p ng-show="newContactForm.username.$invalid && newContactForm.$submitted" class="help-block">Your username is required.</p>
+                </div>
+            </div>
+        </div>
 
-<!--<div ng-dropdown-multiselect=""
-    options="lists"
-    selected-model="searchSelectAllModel"
-    extra-settings="searchSelectAllSettings">
-</div> -->
-<br>
-<label> Etiquetas </label>
-<div ng-dropdown-multiselect="" options="example1data" selected-model="example1model"></div>
+        <!-- FALTAN ETIQUETAS -->
+    </form>
+</div>
 
-<br>
-<button ng-click="newContact(contact)"> New Contact </button>
-<button ng-click="goBack()"> Back </button>
+

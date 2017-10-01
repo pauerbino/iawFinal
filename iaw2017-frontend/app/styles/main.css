@@ -7,7 +7,6 @@
 
 body {
   padding: 0;
-  text-align: center;
   background-image: url("../images/digital-marketing.jpg");
 }
 
@@ -88,15 +87,22 @@ html, body {
   }
 }
 
-.botonClasico {
-    color: #fff;
-    background-color: #99ccff;
-    border-color: #99ccff;
-    display: inline-block;
-    padding: 6px 12px;
-    font-weight: bold;
+.align-center {
     text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    border-radius: 4px;
+}
+
+.form-margin {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.btn-form {
+    width: 150px;
+    margin-top: 20px;
+    width: 190px;
+}
+
+.one-row-form {
+    width: 25%;
+    margin: auto;
 }
