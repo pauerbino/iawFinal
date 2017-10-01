@@ -106,3 +106,27 @@ html, body {
     width: 25%;
     margin: auto;
 }
+
+.glyphicon-chevron-right {
+    float: right;
+}
+
+.lists {
+    width: 60%;
+    margin: auto
+}
+
+.margin-auto {
+    margin: auto;
+}
+
+.my-lists-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.new-list-icon {
+    color: orange;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
