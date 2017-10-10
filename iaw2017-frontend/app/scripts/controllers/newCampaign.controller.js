@@ -24,7 +24,8 @@ angular.module('iaw2017App')
             if (user.length > 0){
                 //var listSize = ListService.getList(campaign.listId).size();
                 ListService.getList(campaign.listId).then(function(lists) {
-                    var listSize = lists.length;
+                    console.log(lists);
+                    var listSize = lists.contacts.length;
                     CampaignService.newCampaign(campaign, user[0].id, listSize).then(function(result) {
                     //var result = CampaignService.newCampaign(campaign, user[0].id, listSize);
                         if (result){

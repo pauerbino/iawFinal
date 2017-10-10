@@ -8,6 +8,7 @@ angular.module('iaw2017App')
     function initialize() {
         ListService.getList($routeParams.id).then(function (list){
             $scope.list = list;
+            console.log($scope.list);
         });
         //$scope.list = ListService.getList($routeParams.id);
     }

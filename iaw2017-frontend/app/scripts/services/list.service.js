@@ -73,6 +73,7 @@ angular.module('iaw2017App')
 
         this.getLists = function() {
             var deferred = $q.defer();
+            console.log(cache.lists);
             if (cache.lists) {
                 deferred.resolve(cache.lists);
             } else {
@@ -97,7 +98,8 @@ angular.module('iaw2017App')
                 method: 'GET',
                 url: Configuration.getConfiguration().baseURL + '/lists/' + id
             }).then(function (response) {
-                deferred.resolve(response.data);
+                console.log(response.data[0]);
+                deferred.resolve(response.data[0]);
             }).catch(function (response) {
                 deferred.reject(response);
             });
@@ -126,13 +128,15 @@ angular.module('iaw2017App')
 
         this.saveList = function(list) {
             var deferred = $q.defer();
-            var body = {};
+            //var body = {};
+            var self = this;
 
             $http({
-                method : 'PUT',
-                url : Configuration.getConfiguration().baseURL + '/lists/' + id,
-                data: body
+                method : 'POST',
+                url : Configuration.getConfiguration().baseURL + '/lists/',
+                data: list
             }).then(function(response) {
+                self.reset();
                 deferred.resolve(response);
             }).catch(function(response) {
                 deferred.reject(response);

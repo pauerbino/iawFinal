@@ -10,6 +10,14 @@ var contacts = [
                 username: "john.mayer",
                 email: "johnmayer@gmail.com",
                 phone: "4525792"
+            },
+            {
+                id: 2,
+                name: "Boris",
+                lastName: "Grey",
+                username: "boris.grey",
+                email: "borisgrey@gmail.com",
+                phone: "4525792"
             }];
 
 var contactsById = {};

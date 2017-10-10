@@ -14,7 +14,7 @@ angular.module('iaw2017App')
     $scope.saveList = function() {
         //ListService.saveList($scope.list);
         ListService.saveList($scope.list).then(function() {
-            $location.path('/contacts');
+            $location.path('/lists');
         });
         //$location.path('/contacts');
     };

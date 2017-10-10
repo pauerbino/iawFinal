@@ -9,8 +9,8 @@
   </tr>
   <tr ng-repeat="campaign in campaigns">
     <td> {{campaign.title}} </td>
-    <td> {{campaign.quantityOpened}} </td>
-    <td> {{campaign.quantityLinked}} </td>
+    <td> {{(campaign.quantityOpened * 100) / campaign.participants | number:2}} % </td>
+    <td> {{(campaign.quantityLinked * 100) / campaign.participants | number:2}} % </td>
     <td> <a href="#" ng-click="getStadistics()">Show Stadistics</a> </td>
     <td>
         <span class="glyphicon glyphicon-remove" ng-click="deleteCampaign(campaign.id)"></span>

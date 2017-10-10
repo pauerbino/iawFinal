@@ -1,8 +1,12 @@
 'use strict';
 angular.module('iaw2017App')
-    .service('CampaignService', ["$q", "$timeout", function ($q, $timeout) {
+    .service('CampaignService', ['$http', '$q', 'Configuration', function ($http, $q, Configuration) {
 
-    	var campaigns = [
+    	var cache = {
+            campaigns: null
+        };
+
+        /*var campaigns = [
             {
                 id: 1,
                 title: "Health Campaign",
@@ -35,14 +39,30 @@ angular.module('iaw2017App')
                 participants: 3,
                 quantityOpened: 3,
                 quantityLinked: 1
-            }];
+            }];*/
+
+        this.reset = function() {
+            cache = {
+                lists: null
+            };
+        };
 
         this.getCampaigns = function() {
             var deferred = $q.defer();
 
-            $timeout(function() {
-                deferred.resolve(campaigns);
-            }, 500);
+            if (cache.campaigns) {
+                deferred.resolve(cache.campaigns);
+            } else {
+               $http({
+                    method: 'GET',
+                    url: Configuration.getConfiguration().baseURL + '/campaigns/'
+                }).then(function (response) {
+                    cache.campaigns = response.data;
+                    deferred.resolve(response.data);
+                }).catch(function (response) {
+                    deferred.reject(response);
+                });
+            }
 
             return deferred.promise;
            // return campaigns;
@@ -50,11 +70,23 @@ angular.module('iaw2017App')
 
         this.newCampaign = function(campaign, userId, listSize) {
             var deferred = $q.defer();
+            var c = {id: 1, title: campaign.title, subject: campaign.subject, from: userId, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0}
+            var self = this;
+           // $timeout(function() {
+           //     var result = campaigns.push({id: 4, title: campaign.title, subject: campaign.subject, from: userId, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0});
+            //   deferred.resolve(result);
+            //}, 500);
 
-            $timeout(function() {
-                var result = campaigns.push({id: 4, title: campaign.title, subject: campaign.subject, from: userId, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0});
-                deferred.resolve(result);
-            }, 500);
+            $http({
+                method : 'POST',
+                url : Configuration.getConfiguration().baseURL + '/campaigns/',
+                data: c
+            }).then(function(response) {
+                self.reset();
+                deferred.resolve(response);
+            }).catch(function(response) {
+                deferred.reject(response);
+            });
 
             return deferred.promise;
             //return (campaigns.push({id: 4, title: campaign.title, subject: campaign.subject, from: userId, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0}));

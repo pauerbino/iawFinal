@@ -22,7 +22,10 @@
 
                 <div class="form-group" ng-class="{'has-error':newCampaignForm.to.$invalid && newCampaignForm.$submitted}">
                     <label for="to"> To *</label>
-                    <input type="text" class="form-control" name="to" ng-model="campaign.to" required>
+                    <select class="form-control" ng-model="campaign.listId" required>
+                        <option ng-repeat="list in lists" value={{list.id}}>{{list.name}}</option>
+                    </select>
+                    <a href="#!/newList" ng-click="">New List</a>
                     <p ng-show="newCampaignForm.to.$invalid && newCampaignForm.$submitted" class="help-block">This field is required.</p>
                 </div>
 

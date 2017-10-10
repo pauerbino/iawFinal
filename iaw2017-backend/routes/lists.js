@@ -85,7 +85,9 @@ router.get('/', function(req, res, next) {
 
 router.get('/:id', function(req, res, next) {
   var id = req.params["id"];
-  var list = listById[id];
+  //var list = listById[id];
+  var list = lists.filter(function(l){ return l.id == id;})
+  console.log(list);
   if (list) {
       res.json(list);
   } else {
@@ -108,12 +110,13 @@ router.delete('/:id', function(req, res, next) {
 });
 
 
-// router.post('/', function(req, res, next) {
-//   var contact = req.body;
-//   contact.id = uuid();
-//   contacts.push(contact);
-//   contactsById[contact.id] = contact;
-//   res.send(contact);
-// });
+router.post('/', function(req, res, next) {
+   var list = req.body;
+   console.log(list);
+   list.id = uuid();
+   lists.push(list);
+   listById[list.id] = list;
+   res.send(list);
+ });
 
 module.exports = router;
