@@ -73,14 +73,15 @@ angular.module('iaw2017App')
 
         this.getLists = function() {
             var deferred = $q.defer();
-            console.log(cache.lists);
             if (cache.lists) {
+                console.log('entro al if');
                 deferred.resolve(cache.lists);
             } else {
                 $http({
                     method: 'GET',
                     url: Configuration.getConfiguration().baseURL + '/lists'
                 }).then(function (response) {
+                    console.log(response);
                     cache.lists = response.data;
                     deferred.resolve(response.data);
                 }).catch(function (response) {
