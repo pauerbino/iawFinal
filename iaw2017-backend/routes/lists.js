@@ -5,24 +5,48 @@ var List = require('../model/listModel.js');
 
 
 router.get('/', function(req, res, next) {
+  console.log("entree al get");
   List.find(function (err, lists) {
     if (err) return next(err);
+    console.log(lists);
     res.json(lists);
   });
 });
 
 router.get('/:id', function(req, res, next) {
-  List.findById(req.params.id, function (err, post) {
+  List.findById(req.params.id).populate('contacts').exec(function(err, post) {
     if (err) return next(err);
     res.json(post);
   });
+  // List.findById(req.params.id, function (err, post) {
+  //   if (err) return next(err);
+  //   console.log("lista encontrada")
+  //   console.log(post);
+  //   post.populate();
+  //   console.log("post populate");
+  //   console.log(post);
+  //   res.json(post);
+  // });
 });
 
 router.post('/', function(req, res, next) {
-  List.create(req.body, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
+  var contactsList = [] ;
+  for(var c of req.body.contacts) {
+    contactsList.push(c._id);
+  }
+  var newList = new List ({
+      name : req.body.name,
+      contacts : contactsList
   });
+  newList.save(function(err) {
+    if (err) throw err;
+    console.log('New list saved successfully!');
+    res.json(newList);
+});
+ // List.create(req.body, function (err, post) {
+  //  if (err) return next(err);
+  //  res.json(post);
+  //});
 });
 
 router.put('/:id', function(req, res, next) {

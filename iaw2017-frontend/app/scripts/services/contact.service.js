@@ -54,7 +54,7 @@ angular.module('iaw2017App')
             };
         };
 
-        this.findContactByUserName = function(userName) {
+        this.findContactByUserName = function(name, lastName) {
             var deferred = $q.defer();
             //var result = contacts.filter(function (contact) {
             //    return (contact.username === userName);
@@ -62,7 +62,7 @@ angular.module('iaw2017App')
 
             if (cache.contacts) {
                 var result = cache.contacts.filter(function (contact) {
-                    return (contact.username === userName);
+                    return (contact.name.toLowerCase() === name.toLowerCase() && contact.lastName.toLowerCase() === lastName.toLowerCase());
                 });
                 deferred.resolve(result);
             }
@@ -73,7 +73,7 @@ angular.module('iaw2017App')
                 }).then(function (response) {
                     cache.contacts = response.data;
                     deferred.resolve(cache.contacts.filter(function (contact) {
-                        return (contact.username === userName);
+                        return (contact.name.toLowerCase() === name.toLowerCase() && contact.lastName.toLowerCase() === lastName.toLowerCase());
                     }));
                 }).catch(function (response) {
                     deferred.reject(response);

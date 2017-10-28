@@ -10,11 +10,13 @@ const cors = require('cors');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost:27017/unTestDB', {useMongoClient: true})
+mongoose.connect('mongodb://localhost:27017/marketingDB', {useMongoClient: true})
   .then(() =>  console.log('connection successful'))
   .catch((err) => console.error(err));
 
 var lists = require('./routes/lists');
+var contacts = require('./routes/contacts');
+var campaigns = require('./routes/campaigns');
 var app = express();
 app.use(cors());
 
@@ -24,6 +26,8 @@ app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/api/v1/lists', lists);
+app.use('/api/v1/contacts', contacts);
+app.use('/api/v1/campaigns', campaigns);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

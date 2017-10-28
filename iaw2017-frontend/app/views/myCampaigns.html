@@ -13,7 +13,10 @@
     <td> {{(campaign.quantityLinked * 100) / campaign.participants | number:2}} % </td>
     <td> <a href="#" ng-click="getStadistics()">Show Stadistics</a> </td>
     <td>
-        <span class="glyphicon glyphicon-remove" ng-click="deleteCampaign(campaign.id)"></span>
+        <!-- <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteCampaign(campaign.id)"></span> -->
+        <span class="glyphicon glyphicon-remove" ng-click="deleteCampaign(campaign._id)"></span>
+        <span class="glyphicon glyphicon-edit"  ng-click="editCampaign(campaign._id)"></span>
+        <!-- <a class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteCampaign(campaign.id)"></a> -->
     </td>
   </tr>
 </table>

@@ -4,66 +4,66 @@ angular.module('iaw2017App')
         var cache = {
             lists: null
         };
-        var lists = [
-            {
-                name: 'List1',
-                id: 1,
-                contacts: [
-                    {
-                        id: 1,
-                        name: "John",
-                        lastName: "Mayer",
-                        username: "john.mayer",
-                        email: "johnmayer@gmail.com",
-                        phone: "4525792"
-                    },
-                    {
-                        id: 2,
-                        name: "Boris",
-                        lastName: "Grey",
-                        username: "boris.grey",
-                        email: "borisgrey@gmail.com",
-                        phone: "4525792"
-                    },
-                    {
-                        id: 3,
-                        name: "Emma",
-                        lastName: "Black",
-                        username: "emma.black",
-                        email: "emmablack@gmail.com",
-                        phone: "4525792"
-                    }
-                ]
-            },{
-                name: 'List2',
-                id: 2,
-                contacts: [
-                    {
-                        id: 1,
-                        name: "John",
-                        lastName: "Mayer",
-                        username: "john.mayer",
-                        email: "johnmayer@gmail.com",
-                        phone: "4525792"
-                    },
-                    {
-                        id: 2,
-                        name: "Boris",
-                        lastName: "Grey",
-                        username: "boris.grey",
-                        email: "borisgrey@gmail.com",
-                        phone: "4525792"
-                    },
-                    {
-                        id: 3,
-                        name: "Emma",
-                        lastName: "Black",
-                        username: "emma.black",
-                        email: "emmablack@gmail.com",
-                        phone: "4525792"
-                    }
-                ]
-            }];
+        // var lists = [
+        //     {
+        //         name: 'List1',
+        //         id: 1,
+        //         contacts: [
+        //             {
+        //                 id: 1,
+        //                 name: "John",
+        //                 lastName: "Mayer",
+        //                 username: "john.mayer",
+        //                 email: "johnmayer@gmail.com",
+        //                 phone: "4525792"
+        //             },
+        //             {
+        //                 id: 2,
+        //                 name: "Boris",
+        //                 lastName: "Grey",
+        //                 username: "boris.grey",
+        //                 email: "borisgrey@gmail.com",
+        //                 phone: "4525792"
+        //             },
+        //             {
+        //                 id: 3,
+        //                 name: "Emma",
+        //                 lastName: "Black",
+        //                 username: "emma.black",
+        //                 email: "emmablack@gmail.com",
+        //                 phone: "4525792"
+        //             }
+        //         ]
+        //     },{
+        //         name: 'List2',
+        //         id: 2,
+        //         contacts: [
+        //             {
+        //                 id: 1,
+        //                 name: "John",
+        //                 lastName: "Mayer",
+        //                 username: "john.mayer",
+        //                 email: "johnmayer@gmail.com",
+        //                 phone: "4525792"
+        //             },
+        //             {
+        //                 id: 2,
+        //                 name: "Boris",
+        //                 lastName: "Grey",
+        //                 username: "boris.grey",
+        //                 email: "borisgrey@gmail.com",
+        //                 phone: "4525792"
+        //             },
+        //             {
+        //                 id: 3,
+        //                 name: "Emma",
+        //                 lastName: "Black",
+        //                 username: "emma.black",
+        //                 email: "emmablack@gmail.com",
+        //                 phone: "4525792"
+        //             }
+        //         ]
+        //     }];
 
         this.reset = function() {
             cache = {
@@ -94,13 +94,13 @@ angular.module('iaw2017App')
 
         this.getList = function(id) {
             var deferred = $q.defer();
-
+            console.log(id);
             $http({
                 method: 'GET',
                 url: Configuration.getConfiguration().baseURL + '/lists/' + id
             }).then(function (response) {
-                console.log(response.data[0]);
-                deferred.resolve(response.data[0]);
+                console.log(response.data);
+                deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
             });
@@ -130,16 +130,18 @@ angular.module('iaw2017App')
         this.saveList = function(list) {
             var deferred = $q.defer();
             //var body = {};
-            var self = this;
-
+            self = this;
+            console.log("se va a guardar en la BD");
             $http({
                 method : 'POST',
-                url : Configuration.getConfiguration().baseURL + '/lists/',
+                url : Configuration.getConfiguration().baseURL + '/lists',
                 data: list
             }).then(function(response) {
                 self.reset();
+                console.log("Ya se guardo la lista");
                 deferred.resolve(response);
             }).catch(function(response) {
+                console.log("Huboerrorrrrr");
                 deferred.reject(response);
             });
             return deferred.promise;

@@ -1,4 +1,4 @@
-<h2 class="align-center"> New Campaign </h2>
+<h2 class="align-center"> Edit Campaign </h2>
 <div>
     <form class="align-center form-margin" name="newCampaignForm" novalidate>
         <div class="row">
@@ -22,7 +22,7 @@
 
                 <div class="form-group" ng-class="{'has-error':newCampaignForm.to.$invalid && newCampaignForm.$submitted}">
                     <label for="to"> To *</label>
-                    <select class="form-control" ng-model="campaign.listId" required>
+                    <select class="form-control" ng-init="campaign.list" ng-model="campaign.list" required>
                         <option ng-repeat="list in lists" value={{list._id}}>{{list.name}}</option>
                     </select>
                     <a href="#!/newList" ng-click="">New List</a>
@@ -30,7 +30,7 @@
                 </div>
 
                 <div>
-                    <button type="submit" class="btn btn-warning btn-form" ng-click="newCampaign(campaign)"> Create </button>
+                    <button type="submit" class="btn btn-warning btn-form" ng-click="saveCampaign(campaign)"> Save </button>
                     <button class="btn btn-default btn-form" ng-click="goBack()"> Back </button>
                 </div>
             </div>

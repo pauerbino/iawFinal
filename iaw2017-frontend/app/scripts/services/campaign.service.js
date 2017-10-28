@@ -43,7 +43,7 @@ angular.module('iaw2017App')
 
         this.reset = function() {
             cache = {
-                lists: null
+                campaigns: null
             };
         };
 
@@ -68,10 +68,27 @@ angular.module('iaw2017App')
            // return campaigns;
         };
 
+        this.getCampaign = function(id) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: Configuration.getConfiguration().baseURL + '/campaigns/' + id
+            }).then(function (response) {
+                console.log(response.data);
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+
+            return deferred.promise;
+        };
+
         this.newCampaign = function(campaign, userId, listSize) {
             var deferred = $q.defer();
-            var c = {id: 1, title: campaign.title, subject: campaign.subject, from: userId, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0}
+            console.log(campaign.content);
+            var c = {title: campaign.title, subject: campaign.subject, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0}
             var self = this;
+            console.log(c);
            // $timeout(function() {
            //     var result = campaigns.push({id: 4, title: campaign.title, subject: campaign.subject, from: userId, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0});
             //   deferred.resolve(result);
@@ -90,6 +107,50 @@ angular.module('iaw2017App')
 
             return deferred.promise;
             //return (campaigns.push({id: 4, title: campaign.title, subject: campaign.subject, from: userId, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0}));
+        };
+
+        this.editCampaign = function(campaign, userId, listSize) {
+            var deferred = $q.defer();
+            var id = campaign._id;
+            var c = {title: campaign.title, subject: campaign.subject, list: campaign.list, content: campaign.content, participants: listSize, quantityOpened: campaign.quantityOpened, quantityLinked: campaign.quantityLinked}
+            var self = this;
+            console.log(c);
+           // $timeout(function() {
+           //     var result = campaigns.push({id: 4, title: campaign.title, subject: campaign.subject, from: userId, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0});
+            //   deferred.resolve(result);
+            //}, 500);
+
+            $http({
+                method : 'PUT',
+                url : Configuration.getConfiguration().baseURL + '/campaigns/' + id,
+                data: c
+            }).then(function(response) {
+                self.reset();
+                deferred.resolve(response);
+            }).catch(function(response) {
+                deferred.reject(response);
+            });
+
+            return deferred.promise;
+            //return (campaigns.push({id: 4, title: campaign.title, subject: campaign.subject, from: userId, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0}));
+        };
+
+        this.deleteCampaign = function(id) {
+            var deferred = $q.defer();
+            var self = this;
+
+            $http({
+                method: 'DELETE',
+                url: Configuration.getConfiguration().baseURL + '/campaigns/' + id
+            }).then(function (response) {
+                self.reset();
+                self.getCampaigns();
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+
+            return deferred.promise;
         };
 
     }]);

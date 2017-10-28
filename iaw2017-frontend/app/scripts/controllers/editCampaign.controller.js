@@ -1,33 +1,34 @@
 'use strict';
 angular.module('iaw2017App')
-  .controller('NewCampaignCtrl', ['$location', '$scope', 'CampaignService', 'ListService', 'UserService', function ( $location, $scope, CampaignService, ListService, UserService) {
+  .controller('EditCampaignCtrl', ['$location', '$routeParams', '$scope', 'CampaignService', 'ListService', 'UserService', function ( $location, $routeParams, $scope, CampaignService, ListService, UserService) {
 
-    $scope.campaigns = [];
-    $scope.lists = [];
+    $scope.campaign = {};
 
     function initialize() {
-        CampaignService.getCampaigns().then(function (campaigns){
-            $scope.campaigns = campaigns;
+        CampaignService.getCampaign($routeParams.id).then(function (campaign){
+            $scope.campaign = campaign;
+            console.log(campaign);
         });
         ListService.getLists().then(function (lists){
             $scope.lists = lists;
         });
-        //$scope.campaigns = CampaignService.getCampaigns();
-        //$scope.lists = ListService.getLists();
+        UserService.getUsers().then(function(users){
+            $scope.users = users;
+        });
     }
 
     initialize();
 
-    $scope.newCampaign = function(campaign) {
+    $scope.saveCampaign = function(campaign) {
         //var user UserService.getUser(campaign.from);
-        console.log(campaign);
+        console.log("se actualizara la campaña");
         UserService.getUser(campaign.from).then(function(user) {
             if (user.length > 0){
                 //var listSize = ListService.getList(campaign.listId).size();
-                ListService.getList(campaign.listId).then(function(lists) {
-                    console.log(lists);
+                ListService.getList(campaign.list).then(function(lists) {
                     var listSize = lists.contacts.length;
-                    CampaignService.newCampaign(campaign, user[0].id, listSize).then(function(result) {
+                    console.log("va a updatear la cmapaña");
+                    CampaignService.editCampaign(campaign, user[0].id, listSize).then(function(result) {
                     //var result = CampaignService.newCampaign(campaign, user[0].id, listSize);
                         if (result){
                             CampaignService.getCampaigns().then(function (campaigns){

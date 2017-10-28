@@ -21,5 +21,16 @@ angular.module('iaw2017App')
     }
 
     initialize();
+
+    $scope.deleteCampaign = function(campaignId) {
+        console.log(campaignId);
+        CampaignService.deleteCampaign(campaignId).then(function (){
+            $location.path("/home");
+        });
+    }
+
+    $scope.editCampaign = function(campaignId) {
+        $location.path("/editCampaign/"+campaignId);
+    };
   
   }]);

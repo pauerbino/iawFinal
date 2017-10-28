@@ -22,7 +22,7 @@ angular.module('iaw2017App')
     };
 
     $scope.goToList = function(list) {
-        $location.path('/contactList/'+ list.id);
+        $location.path('/contactList/'+ list._id);
     };
 
   }]);

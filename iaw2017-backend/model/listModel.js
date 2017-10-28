@@ -1,7 +1,11 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var ListSchema = new mongoose.Schema({
-    name : {type : String, default: ''}
+var ListSchema = Schema({
+    name : {type : String, default: ''},
+    contacts : [{ type: Schema.Types.ObjectId, ref: 'Contact' }]
 });
 
-module.exports = mongoose.model('List', ListSchema);
+var List = mongoose.model('List', ListSchema );
+
+module.exports = List;
