@@ -1,4 +1,32 @@
-<h2 class="align-center"> Sign In </h2>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Register</h1>
+      <p class="lead">Already a member? Please <a href="#!/login">log in</a> instead.</p>
+      <form class="align-center form-margin" name="newContactForm" novalidate>
+        <div class="form-group">
+          <label for="name">Full name</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter your name" ng-model="credentials.name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="credentials.email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Password" ng-model="credentials.password">
+        </div>
+        <button type="submit" class="btn btn-default" ng-click="register()">Register!</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- <h2 class="align-center"> Sign In </h2>
 <div>
     <h4> {{ error }} </h4>
     <form class="align-center form-margin" name="signinForm" novalidate>
@@ -56,3 +84,4 @@
         </div>
     </form>
 </div>
+ -->

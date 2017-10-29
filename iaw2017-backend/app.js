@@ -4,6 +4,7 @@ var path = require('path');
 // var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
 
 const cors = require('cors');
 
@@ -17,9 +18,12 @@ mongoose.connect('mongodb://localhost:27017/marketingDB', {useMongoClient: true}
 var lists = require('./routes/lists');
 var contacts = require('./routes/contacts');
 var campaigns = require('./routes/campaigns');
+var users = require('./routes/users');
+var register = require('./routes/register');
 var app = express();
 app.use(cors());
 
+app.use(passport.initialize());
 // app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
@@ -28,6 +32,8 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/api/v1/lists', lists);
 app.use('/api/v1/contacts', contacts);
 app.use('/api/v1/campaigns', campaigns);
+app.use('/api/v1/users', users);
+app.use('/api/v1/register', register);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
