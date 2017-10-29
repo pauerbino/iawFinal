@@ -111,7 +111,7 @@ html, body {
     float: right;
 }
 
-.lists, .contacts {
+.lists, .contacts, .campaigns {
     width: 60%;
     margin: auto
 }
@@ -125,8 +125,12 @@ html, body {
     justify-content: space-between;
 }
 
-.new-icon {
+.new-icon, .delete-icon, .edit-icon {
     color: orange;
     padding-bottom: 10px;
     cursor: pointer;
+}
+
+.delete-icon, .edit-icon {
+    margin-left: 10px;
 }

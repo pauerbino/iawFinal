@@ -1,4 +1,4 @@
-<h2 class="align-center"> New List </h2>
+<h2 class="align-center"> Edit List </h2>
 
 <br>
 <label> List Name </label>
@@ -6,7 +6,10 @@
 
 <br>
 <label> Search Contacts </label>
+<!-- <input type="text" name="contactName" ng-model="newContact"> -->
 <input type="text" name="contactName" ng-model="searchText">
+<!-- <span class="glyphicon glyphicon-ok" ng-click="addContact()"></span> -->
+<!-- <p ng-show="alert"> The username is not valid </p> -->
 <div ng-repeat="contact in allContacts|filter:searchText" class="checkbox-container">
     <input type="checkbox" ng-model="contact.checked" class="checkbox-contact" name="checkbox-contact">
     <label for="checkbox-contact">
@@ -14,7 +17,7 @@
     </label>
 </div>
 <br>
-<button class="btn btn-warning btn-form" ng-click="createList()"> Create </button>
+<button class="btn btn-warning btn-form" ng-click="editList()"> Edit </button>
 <button class="btn btn-default btn-form" ng-click="goBack()"> Back </button>
 Contacts selected to Add:
 <div ng-repeat="contact in allContacts">

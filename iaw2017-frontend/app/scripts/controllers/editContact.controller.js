@@ -14,9 +14,11 @@ angular.module('iaw2017App')
         initialize();
 
         $scope.editContact = function() {
-            ContactService.editContact($scope.contact).then(function() {
-                $location.path('/myContacts');
-            });
+            if ($scope.editContactForm.$valid) {
+                ContactService.editContact($scope.contact).then(function() {
+                    $location.path('/myContacts');
+                });
+            }
         };
 
         $scope.goBack = function() {

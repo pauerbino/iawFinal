@@ -19,16 +19,17 @@ angular.module('iaw2017App')
         initialize();
 
         $scope.newContact = function() {
-            ContactService.existContact().then(function(response){
-                if (response) {
-                    $scope.userExist = true;
-                } else {
-                    ContactService.createContact($scope.contact).then(function() {
-                        $location.path('/myContacts');
-                    });
-                }
-            });
-
+            if ($scope.newContactForm.$valid) {
+                ContactService.existContact($scope.contact).then(function(response){
+                    if (response) {
+                        $scope.userExist = true;
+                    } else {
+                        ContactService.createContact($scope.contact).then(function() {
+                            $location.path('/myContacts');
+                        });
+                    }
+                });
+            }
         };
 
         $scope.goBack = function() {

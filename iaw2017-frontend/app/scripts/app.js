@@ -79,6 +79,11 @@ angular
         controller: 'EditContactCtrl',
         controllerAs: 'vm'
       })
+      .when('/editList/:id', {
+        templateUrl: 'views/editList.html',
+        controller: 'EditListCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/home'
       });

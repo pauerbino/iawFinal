@@ -5,6 +5,7 @@ angular.module('iaw2017App')
     $scope.campaigns = [];
 
     function initialize() {
+        CampaignService.reset();
         CampaignService.getCampaigns().then(function (campaigns){
             $scope.campaigns = campaigns;
         });
@@ -20,12 +21,16 @@ angular.module('iaw2017App')
 
     $scope.deleteCampaign = function(campaignId) {
         CampaignService.deleteCampaign(campaignId).then(function (){
-            $location.path("/home");
+            initialize();
         });
     };
 
     $scope.editCampaign = function(campaignId) {
-        $location.path("/editCampaign/"+campaignId);
+        $location.path('/editCampaign/'+campaignId);
+    };
+
+    $scope.goToNewCampaign = function() {
+        $location.path('/newCampaign');
     };
 
   }]);

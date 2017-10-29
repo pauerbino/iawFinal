@@ -2,13 +2,20 @@
 angular.module('iaw2017App')
   .controller('NewCampaignCtrl', ['$location', '$scope', 'CampaignService', 'ListService', 'UserService', function ( $location, $scope, CampaignService, ListService, UserService) {
 
-    $scope.campaigns = [];
+    // $scope.campaigns = [];
     $scope.lists = [];
+    $scope.campaign = {
+        title: "",
+        subject: "",
+        list: {},
+        content: "",
+        participants: 0
+    };
 
     function initialize() {
-        CampaignService.getCampaigns().then(function (campaigns){
-            $scope.campaigns = campaigns;
-        });
+        // CampaignService.getCampaigns().then(function (campaigns){
+        //     $scope.campaigns = campaigns;
+        // });
         ListService.getLists().then(function (lists){
             $scope.lists = lists;
         });
@@ -20,13 +27,12 @@ angular.module('iaw2017App')
 
     $scope.newCampaign = function(campaign) {
         //var user UserService.getUser(campaign.from);
-        console.log(campaign);
+
         UserService.getUser(campaign.from).then(function(user) {
             if (user.length > 0){
                 //var listSize = ListService.getList(campaign.listId).size();
-                ListService.getList(campaign.listId).then(function(lists) {
-                    console.log(lists);
-                    var listSize = lists.contacts.length;
+                ListService.getList(campaign.listId).then(function(list) {
+                    $scope.campaign.participants = list.contacts.length;
                     CampaignService.newCampaign(campaign, user[0].id, listSize).then(function(result) {
                     //var result = CampaignService.newCampaign(campaign, user[0].id, listSize);
                         if (result){
@@ -46,5 +52,5 @@ angular.module('iaw2017App')
             }
         });
     };
-  
+
   }]);

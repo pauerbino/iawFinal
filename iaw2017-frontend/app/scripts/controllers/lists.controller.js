@@ -5,9 +5,9 @@ angular.module('iaw2017App')
     $scope.lists = [];
 
     function initialize() {
+        ListService.reset();
         ListService.getLists().then(function (lists){
             $scope.lists = lists;
-            console.log(lists);
         });
     }
 

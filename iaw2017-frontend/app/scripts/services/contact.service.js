@@ -14,63 +14,64 @@ angular.module('iaw2017App')
             };
         };
 
-        service.findContactByUserName = function(name, lastName) {
-            var deferred = $q.defer();
-            //var result = contacts.filter(function (contact) {
-            //    return (contact.username === userName);
-            //});
+        // service.findContactByUserName = function(name, lastName) {
+        //     var deferred = $q.defer();
+        //     //var result = contacts.filter(function (contact) {
+        //     //    return (contact.username === userName);
+        //     //});
 
-            if (cache.contacts) {
-                var result = cache.contacts.filter(function (contact) {
-                    return (contact.name.toLowerCase() === name.toLowerCase() && contact.lastName.toLowerCase() === lastName.toLowerCase());
-                });
-                deferred.resolve(result);
-            }
-            else {
-                $http({
-                    method: 'GET',
-                    url: Configuration.getConfiguration().baseURL + '/contacts/'
-                }).then(function (response) {
-                    cache.contacts = response.data;
-                    deferred.resolve(cache.contacts.filter(function (contact) {
-                        return (contact.name.toLowerCase() === name.toLowerCase() && contact.lastName.toLowerCase() === lastName.toLowerCase());
-                    }));
-                }).catch(function (response) {
-                    deferred.reject(response);
-                });
-            }
+        //     if (cache.contacts) {
+        //         var result = cache.contacts.filter(function (contact) {
+        //             return (contact.name.toLowerCase() === name.toLowerCase() && contact.lastName.toLowerCase() === lastName.toLowerCase());
+        //         });
+        //         deferred.resolve(result);
+        //     }
+        //     else {
+        //         $http({
+        //             method: 'GET',
+        //             url: Configuration.getConfiguration().baseURL + '/contacts/'
+        //         }).then(function (response) {
+        //             cache.contacts = response.data;
+        //             deferred.resolve(cache.contacts.filter(function (contact) {
+        //                 return (contact.name.toLowerCase() === name.toLowerCase() && contact.lastName.toLowerCase() === lastName.toLowerCase());
+        //             }));
+        //         }).catch(function (response) {
+        //             deferred.reject(response);
+        //         });
+        //     }
 
-            return deferred.promise;
-            //return { name: "Gina", lastName:"Turner"};
-        };
+        //     return deferred.promise;
+        //     //return { name: "Gina", lastName:"Turner"};
+        // };
 
-        service.findContactByEmail = function(email) {
-            var deferred = $q.defer();
+        // service.findContactByEmail = function(email) {
+        //     var deferred = $q.defer();
 
-            if (cache.contacts) {
-                var result = cache.contacts.filter(function (contact) {
-                    return (contact.email === email);
-                });
-                deferred.resolve(result);
-            }
-            else {
-                $http({
-                    method: 'GET',
-                    url: Configuration.getConfiguration().baseURL + '/contacts/'
-                }).then(function (response) {
-                    cache.contacts = response.data;
-                    deferred.resolve(cache.contacts.filter(function (contact) {
-                        return (contact.email === email);
-                    }));
-                }).catch(function (response) {
-                    deferred.reject(response);
-                });
-            }
+        //     if (cache.contacts) {
+        //         var result = cache.contacts.filter(function (contact) {
+        //             return (contact.email === email);
+        //         });
+        //         deferred.resolve(result);
+        //     }
+        //     else {
+        //         $http({
+        //             method: 'GET',
+        //             url: Configuration.getConfiguration().baseURL + '/contacts/'
+        //         }).then(function (response) {
+        //             cache.contacts = response.data;
+        //             deferred.resolve(cache.contacts.filter(function (contact) {
+        //                 return (contact.email === email);
+        //             }));
+        //         }).catch(function (response) {
+        //             deferred.reject(response);
+        //         });
+        //     }
 
-            return deferred.promise;
-            //return { name: "Gina", lastName:"Turner"};
-        };
+        //     return deferred.promise;
+        //     //return { name: "Gina", lastName:"Turner"};
+        // };
 
+        //DEVUELVE TODOS LOS CONTACTOS DEL USUARIO LOGGUEADO
         service.getContacts = function() {
             var deferred = $q.defer();
             if (cache.contacts !== null) {
@@ -140,8 +141,6 @@ angular.module('iaw2017App')
             var exist = false;
             service.getContacts().then(function(response) {
                 response.filter(function (c) {
-                    console.log(c);
-                    console.log(contact);
                     if (c.email === contact.email) {
                         exist = true;
                     }
