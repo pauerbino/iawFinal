@@ -28,7 +28,7 @@ angular.module('iaw2017App')
         $scope.alert = false;
         var contact = $scope.newContact.split(" ");
         var name = contact[0];
-        var lastName = contact[1]
+        var lastName = contact[1];
         //var contact = ContactService.findContactByUserName($scope.newContact);
         ContactService.findContactByUserName(name, lastName).then(function(contact) {
             if (contact.length > 0) {
@@ -41,11 +41,11 @@ angular.module('iaw2017App')
             }
             $scope.newContact = '';
         });
-        
+
     };
 
     $scope.removeContact = function(id) {
-        $scope.list.contacts.splice($scope.list.contacts.indexOf(id), 1);  
+        $scope.list.contacts.splice($scope.list.contacts.indexOf(id), 1);
     };
 
   }]);

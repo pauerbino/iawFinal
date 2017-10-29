@@ -111,7 +111,7 @@ html, body {
     float: right;
 }
 
-.lists {
+.lists, .contacts {
     width: 60%;
     margin: auto
 }
@@ -120,12 +120,12 @@ html, body {
     margin: auto;
 }
 
-.my-lists-header {
+.my-header {
     display: flex;
     justify-content: space-between;
 }
 
-.new-list-icon {
+.new-icon {
     color: orange;
     padding-bottom: 10px;
     cursor: pointer;

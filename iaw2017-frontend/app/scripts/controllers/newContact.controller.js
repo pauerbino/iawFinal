@@ -1,39 +1,38 @@
 'use strict';
 angular.module('iaw2017App')
-  .controller('NewContactCtrl', ['$location', '$routeParams', '$scope', 'ContactService', 'ListService',
-    function ( $location, $routeParams, $scope, ContactService, ListService) {
+  .controller('NewContactCtrl', ['$location', '$scope', 'ContactService',
+    function ( $location, $scope, ContactService) {
 
-    $scope.lists = [];
-    $scope.contact = {};
-    $scope.searchSelectAllSettings = { enableSearch: true, showSelectAll: true, keyboardControls: true };
-    $scope.searchSelectAllModel = [];
-    $scope.contacts = [];
-    $scope.example1model = [];
-    $scope.example1data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"} ];
+        $scope.contact = {
+            name: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            tags: []
+        };
 
-    function initialize() {
-        ListService.getLists().then(function (lists){
-            $scope.lists = lists;
-        });
-        ContactService.getContacts().then(function (contacts){
-            $scope.contacts = contacts;
-        });
-    }
+        $scope.userExist = false;
 
-    initialize();
+        function initialize() {
+        }
 
-    $scope.newContact = function(contact) {
-        // ContactService.createContact(contact).then(function(result) {
-        //     if (result){
-        //         ContactService.getContacts().then(function (contacts){
-        //             $scope.contacts = contacts;
-        //         });
-        //         $location.path('/myContacts');
-        //     }
-        //     else {
-        //         $location.path('/newContact');
-        //     }
-        // });
-    };
+        initialize();
+
+        $scope.newContact = function() {
+            ContactService.existContact().then(function(response){
+                if (response) {
+                    $scope.userExist = true;
+                } else {
+                    ContactService.createContact($scope.contact).then(function() {
+                        $location.path('/myContacts');
+                    });
+                }
+            });
+
+        };
+
+        $scope.goBack = function() {
+            $location.path('/myContacts');
+        };
 
   }]);

@@ -123,21 +123,19 @@ angular.module('iaw2017App')
             return deferred.promise;
         };
 
-        this.deleteContactFromList = function(listId, contactId) {
+        this.deleteContactFromList = function() {
 
         };
 
         this.saveList = function(list) {
             var deferred = $q.defer();
             //var body = {};
-            self = this;
             console.log("se va a guardar en la BD");
             $http({
                 method : 'POST',
                 url : Configuration.getConfiguration().baseURL + '/lists',
                 data: list
             }).then(function(response) {
-                self.reset();
                 console.log("Ya se guardo la lista");
                 deferred.resolve(response);
             }).catch(function(response) {

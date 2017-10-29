@@ -86,7 +86,7 @@ angular.module('iaw2017App')
         this.newCampaign = function(campaign, userId, listSize) {
             var deferred = $q.defer();
             console.log(campaign.content);
-            var c = {title: campaign.title, subject: campaign.subject, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0}
+            var c = {title: campaign.title, subject: campaign.subject, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0};
             var self = this;
             console.log(c);
            // $timeout(function() {
@@ -112,7 +112,7 @@ angular.module('iaw2017App')
         this.editCampaign = function(campaign, userId, listSize) {
             var deferred = $q.defer();
             var id = campaign._id;
-            var c = {title: campaign.title, subject: campaign.subject, list: campaign.list, content: campaign.content, participants: listSize, quantityOpened: campaign.quantityOpened, quantityLinked: campaign.quantityLinked}
+            var c = {title: campaign.title, subject: campaign.subject, list: campaign.list, content: campaign.content, participants: listSize, quantityOpened: campaign.quantityOpened, quantityLinked: campaign.quantityLinked};
             var self = this;
             console.log(c);
            // $timeout(function() {

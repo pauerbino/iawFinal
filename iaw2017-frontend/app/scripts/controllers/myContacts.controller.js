@@ -5,12 +5,26 @@ angular.module('iaw2017App')
     $scope.contacts = [];
 
     function initialize() {
+        ContactService.reset();
         ContactService.getContacts().then(function (contacts){
-        	$scope.contacts = contacts;
+            $scope.contacts = contacts;
         });
-       // $scope.contacts = ContactService.getContacts();
     }
 
     initialize();
+
+    $scope.goToNewContact = function() {
+        $location.path('/newContact');
+    };
+
+    $scope.deleteContact = function(id) {
+        ContactService.deleteContact(id).then(function(){
+            initialize();
+        });
+    };
+
+    $scope.editContact = function(id) {
+        $location.path('/editContact/'+id);
+    };
 
   }]);

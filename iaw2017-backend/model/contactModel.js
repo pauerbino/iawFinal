@@ -4,9 +4,9 @@ var Schema = mongoose.Schema;
 var ContactSchema = Schema({
     name : {type : String, default: '', required: true},
     lastName : {type : String, default: '', required: true},
-    email : {type : String, default: '', required: true},
-    phone : {type : Number, required: true},
-    etiquetas: [String]
+    email : {type : String, default: '', required: true, unique: true},
+    phone : {type : Number},
+    tags: [String]
 });
 
 var Contact = mongoose.model('Contact', ContactSchema );

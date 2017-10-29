@@ -6,31 +6,26 @@ angular.module('iaw2017App')
 
     function initialize() {
         CampaignService.getCampaigns().then(function (campaigns){
-        	$scope.campaigns = campaigns;
+            $scope.campaigns = campaigns;
         });
         ListService.getLists().then(function (lists){
-        	$scope.lists = lists;
+            $scope.lists = lists;
         });
         UserService.getUsers().then(function(users){
-        	$scope.users = users;
+            $scope.users = users;
         });
-
-        //$scope.campaigns = CampaignService.getCampaigns();
-        //$scope.lists = ListService.getLists();
-        //$scope.users = UserService.getUsers();
     }
 
     initialize();
 
     $scope.deleteCampaign = function(campaignId) {
-        console.log(campaignId);
         CampaignService.deleteCampaign(campaignId).then(function (){
             $location.path("/home");
         });
-    }
+    };
 
     $scope.editCampaign = function(campaignId) {
         $location.path("/editCampaign/"+campaignId);
     };
-  
+
   }]);
