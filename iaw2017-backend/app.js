@@ -35,6 +35,8 @@ app.use('/api/v1/campaigns', campaigns);
 app.use('/api/v1/users', users);
 app.use('/api/v1/register', register);
 
+require('./config/passport');
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

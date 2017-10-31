@@ -3,17 +3,16 @@ angular.module('iaw2017App')
     .service('UserService', ['$http', '$q', '$window', 'Configuration', function ($http, $q, $window, Configuration) {
         var service = {};
 
-        service.saveToken = function (token) {
+        function saveToken (token) {
             $window.localStorage['mean-token'] = token;
         };
 
-        service.getToken = function () {
+        function getToken () {
             return $window.localStorage['mean-token'];
         };
 
         service.isLoggedIn = function() {
-            var self = this;
-            var token = self.getToken();
+            var token = getToken();
             var payload;
 
             if(token){
@@ -28,10 +27,9 @@ angular.module('iaw2017App')
         };
 
         service.currentUser = function() {
-            var self = this;
 
-            if(self.isLoggedIn()){
-                var token = self.getToken();
+            if(isLoggedIn()){
+                var token = getToken();
                 var payload = token.split('.')[1];
                 payload = $window.atob(payload);
                 payload = JSON.parse(payload);
@@ -44,14 +42,13 @@ angular.module('iaw2017App')
 
         service.register = function(user) {
             var deferred = $q.defer();
-            var self = this;
 
             $http({
                 method: 'POST',
                 url: Configuration.getConfiguration().baseURL + '/register',
                 data: user
             }).then(function (response) {
-                self.saveToken(response.data.token);
+                saveToken(response.data.token);
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -62,7 +59,6 @@ angular.module('iaw2017App')
 
         service.login = function(user) {
             var deferred = $q.defer();
-            var self = this;
             console.log("En servicio");
 
             $http({
@@ -70,7 +66,7 @@ angular.module('iaw2017App')
                 url: Configuration.getConfiguration().baseURL + '/users',
                 data: user
             }).then(function (response) {
-                self.saveToken(response.data.token);
+                saveToken(response.data.token);
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -90,6 +86,8 @@ angular.module('iaw2017App')
             }
             });
         };
+
+        return service;
 
     }]);
 

@@ -84,6 +84,11 @@ angular
         controller: 'EditListCtrl',
         controllerAs: 'vm'
       })
+      .when('/logOut', {
+        templateUrl: 'views/home.html',
+        controller: 'LogOutCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/home'
       });
