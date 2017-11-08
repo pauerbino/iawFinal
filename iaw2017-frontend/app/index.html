@@ -39,16 +39,18 @@
             <!-- <a class="navbar-brand" href="#/">iaw2017</a> -->
           </div>
 
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+          <div class="collapse navbar-collapse" id="js-navbar-collapse"  ng-controller='MainCtrl' >
 
             <ul class="nav navbar-nav">
             <!--  <li class="active"><a href="#/">Campaigns</a></li> -->
-              <li><a href="#!/home">Who are we?</a></li>
-              <li><a href="#!/lists">My Lists</a></li>
-              <li><a href="#!/myCampaigns">Campaigns</a></li>
-              <li><a ng-href="#!/newCampaign">New Campaign</a></li>
-              <li><a ng-href="#!/myContacts">Contacts</a></li>
-              <li><a ng-href="#!/logOut">Log Out</a></li>
+              <li><a href="#!/home" ng-show="!isLoggedIn">Who are we?</a></li>
+              <li><a href="#!/lists" ng-show="isLoggedIn">My Lists</a></li>
+              <li><a href="#!/myCampaigns" ng-show="isLoggedIn">Campaigns</a></li>
+              <li><a ng-href="#!/newCampaign" ng-show="isLoggedIn">New Campaign</a></li>
+              <li><a ng-href="#!/myContacts" ng-show="isLoggedIn">Contacts</a></li>
+              <li><a ng-href="#!/login" ng-show="!isLoggedIn">Log In</a></li>
+              <li><a ng-href="#!/signin" ng-show="!isLoggedIn">Sign In</a></li>
+              <li><a ng-href="#!/logOut" ng-show="isLoggedIn">Log Out</a></li>
             </ul>
           </div>
         </div>
@@ -98,6 +100,7 @@
         <script src="scripts/controllers/myCampaigns.controller.js"></script>
         <script src="scripts/controllers/myContacts.controller.js"></script>
         <script src="scripts/controllers/signin.controller.js"></script>
+        <script src="scripts/controllers/main.controller.js"></script>
 
 
 

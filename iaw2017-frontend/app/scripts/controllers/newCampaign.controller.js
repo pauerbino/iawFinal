@@ -30,7 +30,7 @@ angular.module('iaw2017App')
 
         UserService.getUser(campaign.from).then(function(user) {
             if (user.length > 0){
-                //var listSize = ListService.getList(campaign.listId).size();
+                var listSize = ListService.getList(campaign.listId).size();
                 ListService.getList(campaign.listId).then(function(list) {
                     $scope.campaign.participants = list.contacts.length;
                     CampaignService.newCampaign(campaign, user[0].id, listSize).then(function(result) {

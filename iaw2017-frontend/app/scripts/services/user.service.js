@@ -1,15 +1,15 @@
 'use strict';
 angular.module('iaw2017App')
-    .service('UserService', ['$http', '$q', '$window', 'Configuration', function ($http, $q, $window, Configuration) {
+    .service('UserService', ['$http', '$q', '$rootScope', '$window', 'Configuration', function ($http, $q, $rootScope, $window, Configuration) {
         var service = {};
 
         function saveToken (token) {
             $window.localStorage['mean-token'] = token;
-        };
+        }
 
         function getToken () {
             return $window.localStorage['mean-token'];
-        };
+        }
 
         service.isLoggedIn = function() {
             var token = getToken();
@@ -20,7 +20,7 @@ angular.module('iaw2017App')
                 payload = $window.atob(payload);
                 payload = JSON.parse(payload);
                 return payload.exp > Date.now() / 1000;
-            } 
+            }
             else {
                 return false;
             }
@@ -28,7 +28,7 @@ angular.module('iaw2017App')
 
         service.currentUser = function() {
 
-            if(isLoggedIn()){
+            if(service.isLoggedIn()){
                 var token = getToken();
                 var payload = token.split('.')[1];
                 payload = $window.atob(payload);
@@ -49,6 +49,7 @@ angular.module('iaw2017App')
                 data: user
             }).then(function (response) {
                 saveToken(response.data.token);
+                $rootScope.$broadcast('updateNavigation');
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -59,7 +60,6 @@ angular.module('iaw2017App')
 
         service.login = function(user) {
             var deferred = $q.defer();
-            console.log("En servicio");
 
             $http({
                 method: 'POST',
@@ -67,6 +67,7 @@ angular.module('iaw2017App')
                 data: user
             }).then(function (response) {
                 saveToken(response.data.token);
+                $rootScope.$broadcast('updateNavigation');
                 deferred.resolve(response.data);
             }).catch(function (response) {
                 deferred.reject(response);
@@ -77,12 +78,13 @@ angular.module('iaw2017App')
 
         service.logout = function() {
             $window.localStorage.removeItem('mean-token');
+            $rootScope.$broadcast('updateNavigation');
         };
 
         service.getProfile = function () {
             return $http.get('/api/profile', {
                 headers: {
-                    Authorization: 'Bearer '+ authentication.getToken()
+                    Authorization: 'Bearer '+ getToken()
             }
             });
         };
