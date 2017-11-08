@@ -44,9 +44,8 @@
             <ul class="nav navbar-nav">
             <!--  <li class="active"><a href="#/">Campaigns</a></li> -->
               <li><a href="#!/home" ng-show="!isLoggedIn">Who are we?</a></li>
-              <li><a href="#!/lists" ng-show="isLoggedIn">My Lists</a></li>
+              <li><a href="#!/lists" ng-show="isLoggedIn">Lists</a></li>
               <li><a href="#!/myCampaigns" ng-show="isLoggedIn">Campaigns</a></li>
-              <li><a ng-href="#!/newCampaign" ng-show="isLoggedIn">New Campaign</a></li>
               <li><a ng-href="#!/myContacts" ng-show="isLoggedIn">Contacts</a></li>
               <li><a ng-href="#!/login" ng-show="!isLoggedIn">Log In</a></li>
               <li><a ng-href="#!/signin" ng-show="!isLoggedIn">Sign In</a></li>
@@ -86,7 +85,6 @@
     <!-- endbuild -->
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/lists.controller.js"></script>
         <script src="scripts/controllers/contactList.controller.js"></script>
         <script src="scripts/controllers/editCampaign.controller.js"></script>
         <script src="scripts/controllers/editContact.controller.js"></script>
@@ -99,6 +97,7 @@
         <script src="scripts/controllers/newContact.controller.js"></script>
         <script src="scripts/controllers/myCampaigns.controller.js"></script>
         <script src="scripts/controllers/myContacts.controller.js"></script>
+        <script src="scripts/controllers/myLists.controller.js"></script>
         <script src="scripts/controllers/signin.controller.js"></script>
         <script src="scripts/controllers/main.controller.js"></script>
 

@@ -1,12 +1,12 @@
 <h2 class="align-center"> Edit Campaign </h2>
 <div>
-    <form class="align-center form-margin" name="newCampaignForm" novalidate>
+    <form class="align-center form-margin" name="editCampaignForm" novalidate>
         <div class="row">
             <div class="col-xs-6">
-                <div class="form-group" ng-class="{'has-error':newCampaignForm.title.$invalid && newCampaignForm.$submitted}">
+                <div class="form-group" ng-class="{'has-error':editCampaignForm.title.$invalid && editCampaignForm.$submitted}">
                     <label for="title"> Title *</label>
                     <input type="text" class="form-control" name="title" ng-model="campaign.title" required>
-                    <p ng-show="newCampaignForm.title.$invalid && newCampaignForm.$submitted" class="help-block">The title is required.</p>
+                    <p ng-show="editCampaignForm.title.$invalid && editCampaignForm.$submitted" class="help-block">The title is required.</p>
                 </div>
 
                 <div class="form-group">
@@ -14,19 +14,19 @@
                     <input type="text" class="form-control" name="subject" ng-model="campaign.subject" required>
                 </div>
 
-                <div class="form-group" ng-class="{'has-error':newCampaignForm.from.$invalid && newCampaignForm.$submitted}">
+                <div class="form-group" ng-class="{'has-error':editCampaignForm.from.$invalid && editCampaignForm.$submitted}">
                     <label for="from"> From *</label>
-                    <input type="text" class="form-control" name="from" ng-model="campaign.from" required>
-                    <p ng-show="newCampaignForm.from.$invalid && newCampaignForm.$submitted" class="help-block">This field is required.</p>
+                    <input type="email" class="form-control" name="from" ng-model="campaign.from" required>
+                    <p ng-show="editCampaignForm.from.$invalid && editCampaignForm.$submitted" class="help-block">Enter a valid email.</p>
                 </div>
 
-                <div class="form-group" ng-class="{'has-error':newCampaignForm.to.$invalid && newCampaignForm.$submitted}">
+                <div class="form-group" ng-class="{'has-error':editCampaignForm.to.$invalid && editCampaignForm.$submitted}">
                     <label for="to"> To *</label>
-                    <select class="form-control" ng-init="campaign.list" ng-model="campaign.list" required>
+                    <select class="form-control" ng-model="selectedListId" required>
                         <option ng-repeat="list in lists" value={{list._id}}>{{list.name}}</option>
                     </select>
                     <a href="#!/newList" ng-click="">New List</a>
-                    <p ng-show="newCampaignForm.to.$invalid && newCampaignForm.$submitted" class="help-block">This field is required.</p>
+                    <p ng-show="editCampaignForm.to.$invalid && editCampaignForm.$submitted" class="help-block">This field is required.</p>
                 </div>
 
                 <div>

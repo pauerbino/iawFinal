@@ -12,11 +12,7 @@ angular.module('iaw2017App')
         };
 
         $scope.userExist = false;
-
-        function initialize() {
-        }
-
-        initialize();
+        $scope.newTag = '';
 
         $scope.newContact = function() {
             if ($scope.newContactForm.$valid) {
@@ -34,6 +30,17 @@ angular.module('iaw2017App')
 
         $scope.goBack = function() {
             $location.path('/myContacts');
+        };
+
+        $scope.addTag = function() {
+            if ($scope.contact.tags.indexOf($scope.newTag) === -1) {
+                $scope.contact.tags.push($scope.newTag);
+                $scope.newTag = "";
+            }
+        };
+
+        $scope.removeTag = function(tag) {
+            $scope.contact.tags.splice($scope.contact.tags.indexOf(tag), 1);
         };
 
   }]);

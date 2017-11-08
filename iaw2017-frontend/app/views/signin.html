@@ -1,87 +1,28 @@
-<div class="container">
-
-  <div class="row">
-    <div class="col-md-6">
-      <h1>Register</h1>
-      <p class="lead">Already a member? Please <a href="#!/login">log in</a> instead.</p>
-      <form class="align-center form-margin" name="newContactForm" novalidate>
-        <div class="form-group">
-          <label for="name">Full name</label>
-          <input type="text" class="form-control" id="name" placeholder="Enter your name" ng-model="credentials.name">
-        </div>
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="credentials.email">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Password" ng-model="credentials.password">
-        </div>
-        <button type="submit" class="btn btn-default" ng-click="register()">Register!</button>
-      </form>
-    </div>
-  </div>
-
-</div>
-
-
-
-<!-- <h2 class="align-center"> Sign In </h2>
+<h2 class="align-center"> Sign In </h2>
+<p class="align-center">Already a member? Please <a href="#!/login">log in</a> instead.</p>
 <div>
-    <h4> {{ error }} </h4>
-    <form class="align-center form-margin" name="signinForm" novalidate>
+    <form class="align-center form-margin one-row-form" name="signinForm" novalidate>
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-12">
                 <div class="form-group" ng-class="{'has-error':signinForm.name.$invalid && signinForm.$submitted}">
-                    <label for="name"> Name *</label>
-                    <input type="text" class="form-control" name="name" ng-model="contact.name" required>
-                    <p ng-show="signinForm.name.$invalid && signinForm.$submitted" class="help-block">Your name is required.</p>
+                    <label for="name">Full name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Enter your name" ng-model="credentials.name" required>
+                    <p ng-show="signinForm.name.$invalid && signinForm.$submitted" class="help-block">This field is required.</p>
                 </div>
-
-                <div class="form-group" ng-class="{'has-error':signinForm.lastName.$invalid && signinForm.$submitted}">
-                    <label for="lastName"> Last Name *</label>
-                    <input type="text" class="form-control" name="lastName" ng-model="contact.lastName" required>
-                    <p ng-show="signinForm.lastName.$invalid && signinForm.$submitted" class="help-block">Your last name is required.</p>
-                </div>
-
-                <div class="form-group" ng-class="{'has-error':signinForm.email.$invalid && signinForm.$submitted}" >
-                    <label for="email"> Email *</label>
-                    <input type="email" class="form-control" name="email" ng-model="contact.email" required>
+                <div class="form-group" ng-class="{'has-error':signinForm.email.$invalid && signinForm.$submitted}">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" name="email" placeholder="Enter email" ng-model="credentials.email" required>
                     <p ng-show="signinForm.email.$invalid && signinForm.$submitted" class="help-block">Enter a valid email.</p>
                 </div>
-
-                <div class="form-group">
-                    <label for="phone"> Phone </label>
-                    <input type="text" class="form-control" name="phone" ng-model="contact.phone">
+                <div class="form-group" ng-class="{'has-error':signinForm.password.$invalid && signinForm.$submitted}">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Password" ng-model="credentials.password" required>
+                    <p ng-show="signinForm.password.$invalid && signinForm.$submitted" class="help-block">Enter a valid email.</p>
                 </div>
-            </div>
-
-            <div class="col-xs-6">
-                <div class="form-group" ng-class="{'has-error':signinForm.username.$invalid && signinForm.$submitted}">
-                    <label for="username"> Username *</label>
-                    <input type="text" class="form-control" name="username" ng-model="user.username" required>
-                    <p ng-show="signinForm.username.$invalid && signinForm.$submitted" class="help-block">The username is required.</p>
-                </div>
-
-                <div class="form-group" ng-class="{'has-error':signinForm.password.$invalid && signinForm.$submitted}" >
-                    <label for="password"> Password *</label>
-                    <input type="password" class="form-control" name="password" ng-model="user.password" required>
-                    <p ng-show="signinForm.password.$invalid && signinForm.$submitted" class="help-block">Your password is required</p>
-                </div>
-
-
-                <div class="form-group" ng-class="{'has-error':signinForm.confirmPassword.$invalid && signinForm.$submitted}" >
-                    <label for="confirmPassword"> Confirm Password *</label>
-                    <input type="password" class="form-control" name="confirmPassword" ng-model="user.confirmPassword" required>
-                    <p ng-show="signinForm.confirmPassword.$invalid && signinForm.$submitted" class="help-block">You need to confirm the password</p>
-                </div>
-
                 <div>
-                    <button type="submit" class="btn btn-warning btn-form" ng-click="register(user)"> Sign in </button>
-                    <button class="btn btn-default btn-form" ng-click="goBack()"> Back </button>
+                    <button type="submit" class="btn btn-warning btn-form" ng-click="register()">Register!</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
- -->

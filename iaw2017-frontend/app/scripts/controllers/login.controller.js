@@ -8,51 +8,13 @@ angular.module('iaw2017App')
     };
 
     $scope.login = function() {
-        UserService.login($scope.credentials).then(function(){
-          console.log("ahora hace");
-          $location.path('/lists');
-        });
+        if ($scope.loginForm.$valid) {
+            UserService.login($scope.credentials).then(function(){
+              $location.path('/lists');
+            }).catch(function(res){
+                console.log(res);
+            });
+        }
     };
 
   }]);
-
-
-
-// 'use strict';
-// angular.module('iaw2017App')
-//   .controller('LoginCtrl', ['$location', '$scope', 'UserService', function ( $location, $scope, UserService) {
-
-//     $scope.users = [];
-//     $scope.error = '';
-
-//     function initialize() {
-//         $scope.error = '';
-//         UserService.getUsers().then(function(users) {
-//             $scope.users = users;
-//         });
-//         //$scope.users = UserService.getUsers();
-//     }
-
-//     initialize();
-
-//     $scope.logIn = function(user) {
-//     	//exist = UserService.existUser(user);
-//         UserService.existUser(user).then(function(result) {
-//             if (result) {
-//                 $location.path('/contacts');
-//             } else {
-//                 user.username = "";
-//                 user.password = "";
-//                 $scope.error = 'Invalid username or password.';
-//                 $location.path('/login');
-//             }
-//         });
-//         //if (exist) $location.path('/contacts');
-//     	//else{
-//     	//	user.username = "";
-//     	//	user.password = "";
-//     	//	$location.path('/login');
-//     	//}
-//     };
-
-//   }]);

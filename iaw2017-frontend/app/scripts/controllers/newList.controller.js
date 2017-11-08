@@ -13,15 +13,17 @@ angular.module('iaw2017App')
         initialize();
 
         $scope.createList = function() {
-            var contactsSelected = $scope.allContacts.filter(function(obj) {
-                if (obj.checked) {
-                    return obj;
-                }
-            });
-            $scope.list.contacts = contactsSelected;
-            ListService.createList($scope.list).then(function() {
-                $location.path('/lists');
-            });
+            if ($scope.newListForm.$valid) {
+                var contactsSelected = $scope.allContacts.filter(function(obj) {
+                    if (obj.checked) {
+                        return obj;
+                    }
+                });
+                $scope.list.contacts = contactsSelected;
+                ListService.createList($scope.list).then(function() {
+                    $location.path('/lists');
+                });
+            }
         };
 
         $scope.goBack = function() {

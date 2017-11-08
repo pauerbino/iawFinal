@@ -11,7 +11,6 @@ var UserSchema = new Schema({
 });
 
 UserSchema.methods.setPassword = function(password){
-  console.log("Entre a metodo");
   this.salt = crypto.randomBytes(16).toString('hex');
   this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
 };
@@ -21,9 +20,9 @@ UserSchema.methods.validPassword = function(password) {
   return this.hash === hash;
 };
 
-UserSchema.methods.prueba = function(password) {
-  console.log("anda ok el llamado a metodo");
-};
+// UserSchema.methods.prueba = function(password) {
+//   console.log("anda ok el llamado a metodo");
+// };
 
 UserSchema.methods.generateJwt = function() {
   var expiry = new Date();

@@ -48,18 +48,12 @@ angular.module('iaw2017App')
             return deferred.promise;
         };
 
-        service.newCampaign = function(campaign, userId, listSize) {
+        service.newCampaign = function(campaign) {
             var deferred = $q.defer();
-            var c = {title: campaign.title, subject: campaign.subject, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0};
-           // $timeout(function() {
-           //     var result = campaigns.push({id: 4, title: campaign.title, subject: campaign.subject, from: userId, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0});
-            //   deferred.resolve(result);
-            //}, 500);
-
             $http({
                 method : 'POST',
                 url : Configuration.getConfiguration().baseURL + '/campaigns',
-                data: c
+                data: campaign
             }).then(function(response) {
                 deferred.resolve(response);
             }).catch(function(response) {
@@ -67,22 +61,16 @@ angular.module('iaw2017App')
             });
 
             return deferred.promise;
-            //return (campaigns.push({id: 4, title: campaign.title, subject: campaign.subject, from: userId, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0}));
         };
 
-        service.editCampaign = function(campaign, userId, listSize) {
+        service.editCampaign = function(campaign) {
             var deferred = $q.defer();
             var id = campaign._id;
-            var c = {title: campaign.title, subject: campaign.subject, list: campaign.list, content: campaign.content, participants: listSize, quantityOpened: campaign.quantityOpened, quantityLinked: campaign.quantityLinked};
-           // $timeout(function() {
-           //     var result = campaigns.push({id: 4, title: campaign.title, subject: campaign.subject, from: userId, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0});
-            //   deferred.resolve(result);
-            //}, 500);
 
             $http({
                 method : 'PUT',
                 url : Configuration.getConfiguration().baseURL + '/campaigns/' + id,
-                data: c
+                data: campaign
             }).then(function(response) {
                 deferred.resolve(response);
             }).catch(function(response) {
@@ -90,7 +78,6 @@ angular.module('iaw2017App')
             });
 
             return deferred.promise;
-            //return (campaigns.push({id: 4, title: campaign.title, subject: campaign.subject, from: userId, listId: campaign.listId, content: campaign.content, participants: listSize, quantityOpened: 0, quantityLinked: 0}));
         };
 
         service.deleteCampaign = function(id) {

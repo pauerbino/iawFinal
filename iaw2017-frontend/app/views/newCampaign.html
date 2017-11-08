@@ -16,13 +16,13 @@
 
                 <div class="form-group" ng-class="{'has-error':newCampaignForm.from.$invalid && newCampaignForm.$submitted}">
                     <label for="from"> From *</label>
-                    <input type="text" class="form-control" name="from" ng-model="campaign.from" required>
-                    <p ng-show="newCampaignForm.from.$invalid && newCampaignForm.$submitted" class="help-block">This field is required.</p>
+                    <input type="email" class="form-control" name="from" ng-model="campaign.from" required>
+                    <p ng-show="newCampaignForm.from.$invalid && newCampaignForm.$submitted" class="help-block">Enter a valid email.</p>
                 </div>
 
                 <div class="form-group" ng-class="{'has-error':newCampaignForm.to.$invalid && newCampaignForm.$submitted}">
                     <label for="to"> To *</label>
-                    <select class="form-control" ng-model="campaign.listId" required>
+                    <select class="form-control" ng-model="selectedListId" required>
                         <option ng-repeat="list in lists" value={{list._id}}>{{list.name}}</option>
                     </select>
                     <a href="#!/newList" ng-click="">New List</a>

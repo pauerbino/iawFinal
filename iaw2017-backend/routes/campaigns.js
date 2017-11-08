@@ -22,11 +22,10 @@ router.post('/', function(req, res, next) {
     var newCampaign = new Campaign ({
           title : req.body.title,
           subject : req.body.subject,
-          list : req.body.listId,
+          from: req.body.from,
+          list : req.body.list,
           content : req.body.content,
-          participants : req.body.participants,
-          quantityOpened : 0,
-          quantityLinked : 0
+          participants : req.body.participants
     });
     newCampaign.save(function(err) {
         if (err) throw err;

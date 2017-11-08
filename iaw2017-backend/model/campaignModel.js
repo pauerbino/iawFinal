@@ -4,9 +4,9 @@ var Schema = mongoose.Schema;
 var CampaignSchema = Schema({
     title : {type : String, default: '', required: true},
     subject : {type : String, default: '', required: true},
-    //usuario que creo la campaaña
+    from: {type : String, default: '', required: true},
     list : { type: Schema.Types.ObjectId, ref: 'List' },
-    content : {type : String, default: '', required: true},
+    content : {type : String, default: ''},
     participants : {type : Number, required: true},
     quantityOpened : {type : Number, default: 0, required: true},
     quantityLinked : {type : Number, default: 0, required: true},
