@@ -13,7 +13,7 @@ angular.module('iaw2017App')
             UserService.register($scope.credentials).then(function(){
               $location.path('/lists');
             }).catch(function(res){
-                console.log(res);
+                $scope.error("The email already exists. Please, try a new one.");
             });
         }
     };
