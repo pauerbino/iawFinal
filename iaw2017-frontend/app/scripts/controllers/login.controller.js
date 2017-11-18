@@ -12,7 +12,7 @@ angular.module('iaw2017App')
             UserService.login($scope.credentials).then(function(){
               $location.path('/lists');
             }).catch(function(res){
-                $scope.error = "Invalid username or password. Please verify and try again";
+                console.log(res);
             });
         }
     };
