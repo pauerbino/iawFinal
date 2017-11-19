@@ -17,8 +17,7 @@ angular.module('iaw2017App')
         ListService.getLists().then(function (lists){
             CampaignService.getCampaign($routeParams.id).then(function (campaign){
                 $scope.campaign = campaign;
-                console.log(campaign);
-                // $scope.selectedListId = campaign.list;
+                $scope.selectedListId = campaign.list;
                 $scope.lists = lists;
             });
         });
@@ -36,6 +35,10 @@ angular.module('iaw2017App')
                 });
             });
         }
+    };
+
+    $scope.goBack = function() {
+        $location.path('/myCampaigns');
     };
 
   }]);

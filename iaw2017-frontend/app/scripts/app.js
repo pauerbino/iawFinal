@@ -89,6 +89,16 @@ angular
         controller: 'LogOutCtrl',
         controllerAs: 'vm'
       })
+    .when('/bePremium', {
+        templateUrl: 'views/bePremium.html',
+        controller: 'BePremiumCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/statistics/:id', {
+        templateUrl: 'views/statistics.html',
+        controller: 'StatisticsCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/home'
       });

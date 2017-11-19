@@ -20,7 +20,7 @@
                 <label for="contactName"> Search Contacts </label>
                 <input class="form-control" type="text" name="contactName" ng-model="searchText">
                 <div ng-repeat="contact in allContacts|filter:searchText" class="checkbox-container">
-                    <input type="checkbox" ng-model="contact.checked" class="checkbox-contact" name="checkbox-contact">
+                    <input type="checkbox" ng-model="contact.checked" class="checkbox-contact" name="checkbox-contact" placeholder="Search for name, email or tags">
                     <label for="checkbox-contact">
                         {{contact.name}} {{contact.lastName}} ({{contact.email}})
                     </label>

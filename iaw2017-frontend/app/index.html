@@ -12,6 +12,7 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
@@ -49,7 +50,7 @@
               <li><a ng-href="#!/myContacts" ng-show="isLoggedIn">Contacts</a></li>
               <li><a ng-href="#!/login" ng-show="!isLoggedIn">Log In</a></li>
               <li><a ng-href="#!/signin" ng-show="!isLoggedIn">Sign In</a></li>
-              <li><a ng-href="#!/logOut" ng-show="isLoggedIn">Log Out</a></li>
+              <li><a ng-href="#!/logOut" class="logout" ng-show="isLoggedIn">Log Out</a></li>
             </ul>
           </div>
         </div>
@@ -99,9 +100,8 @@
         <script src="scripts/controllers/myContacts.controller.js"></script>
         <script src="scripts/controllers/myLists.controller.js"></script>
         <script src="scripts/controllers/signin.controller.js"></script>
+        <script src="scripts/controllers/statistics.controller.js"></script>
         <script src="scripts/controllers/main.controller.js"></script>
-
-
 
         <script src="scripts/services/campaign.service.js"></script>
         <script src="scripts/services/configuration.service.js"></script>

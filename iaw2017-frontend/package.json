@@ -2,6 +2,8 @@
   "name": "iaw2017",
   "private": true,
   "dependencies": {
+    "angular.piechart": "^0.2.4",
+    "chart.js": "^2.7.1",
     "time-grunt": "^1.0.0"
   },
   "devDependencies": {

@@ -27,4 +27,9 @@ angular.module('iaw2017App')
         $location.path('/newCampaign');
     };
 
+    $scope.goToStatistics  = function(id) {
+        $location.path('/statistics/'+id);
+    };
+
+
   }]);

@@ -111,13 +111,17 @@ html, body {
     float: right;
 }
 
-.lists, .contacts, .campaigns {
+.lists, .contacts, .campaigns, .statistics {
     width: 60%;
     margin: auto
 }
 
 .margin-auto {
     margin: auto;
+}
+
+.logout {
+    background: gainsboro;
 }
 
 .my-header {
@@ -129,6 +133,11 @@ html, body {
     color: orange;
     padding-bottom: 10px;
     cursor: pointer;
+}
+
+.statistics-button {
+    margin-left: 100px;
+    margin-top: 20px;
 }
 
 .add-icon {

@@ -26,12 +26,15 @@ angular.module('iaw2017App')
             ListService.getList($scope.selectedListId).then(function(list) {
                 $scope.campaign.participants = list.contacts.length;
                 $scope.campaign.list = $scope.selectedListId;
-                CampaignService.newCampaign($scope.campaign).then(function(result) {
-                    console.log(campaign);
+                CampaignService.newCampaign($scope.campaign).then(function() {
                     $location.path('/myCampaigns');
                 });
             });
         }
+    };
+
+    $scope.goBack = function() {
+        $location.path('/myCampaigns');
     };
 
   }]);
