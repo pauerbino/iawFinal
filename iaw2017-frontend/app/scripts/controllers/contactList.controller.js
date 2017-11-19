@@ -1,14 +1,26 @@
 'use strict';
 angular.module('iaw2017App')
-  .controller('ContactListCtrl', ['$location', '$routeParams', '$scope', 'ListService',
-    function ( $location, $routeParams, $scope, ListService) {
+  .controller('ContactListCtrl', ['$location', '$routeParams', '$scope', 'ListService', 'UserService',
+    function ( $location, $routeParams, $scope, ListService, UserService) {
 
     $scope.list = {};
 
+    $scope.currentUser = {
+            email : "",
+            name : ""
+        }
+
     function initialize() {
-        ListService.getList($routeParams.id).then(function (list){
-            $scope.list = list;
-        });
+        if (UserService.isLoggedIn()) {
+            $scope.currentUser = UserService.currentUser();
+            ListService.getList($routeParams.id, $scope.currentUser.email).then(function (list){
+                $scope.list = list;
+                console.log($scope.list);
+            });
+        }
+        else {
+            $location.path('/forbiddenAccess');
+        }
     }
 
     initialize();

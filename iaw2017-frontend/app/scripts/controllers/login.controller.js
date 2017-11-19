@@ -7,12 +7,18 @@ angular.module('iaw2017App')
       password : ""
     };
 
+    $scope.message;
+
+    function initialize() {
+      $scope.message = "";
+    }
+
     $scope.login = function() {
         if ($scope.loginForm.$valid) {
             UserService.login($scope.credentials).then(function(){
               $location.path('/lists');
             }).catch(function(res){
-                console.log(res);
+                $scope.message = "The username or the password is not valid. Please try again."
             });
         }
     };

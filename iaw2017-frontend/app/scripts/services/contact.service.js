@@ -72,14 +72,14 @@ angular.module('iaw2017App')
         // };
 
         //DEVUELVE TODOS LOS CONTACTOS DEL USUARIO LOGGUEADO
-        service.getContacts = function() {
+        service.getContacts = function(email) {
             var deferred = $q.defer();
             if (cache.contacts !== null) {
                 deferred.resolve(cache.contacts);
             } else {
                $http({
                     method: 'GET',
-                    url: Configuration.getConfiguration().baseURL + '/contacts'
+                    url: Configuration.getConfiguration().baseURL + '/contacts/' + email 
                 }).then(function (response) {
                     cache.contacts = response.data;
                     deferred.resolve(response.data);
@@ -91,12 +91,12 @@ angular.module('iaw2017App')
             return deferred.promise;
         };
 
-        service.getContact = function(id) {
+        service.getContact = function(id, email) {
             var deferred = $q.defer();
 
            $http({
                 method: 'GET',
-                url: Configuration.getConfiguration().baseURL + '/contacts/' + id
+                url: Configuration.getConfiguration().baseURL + '/contacts/' + id + '/' + email
             }).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {

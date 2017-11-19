@@ -1,14 +1,25 @@
 'use strict';
 angular.module('iaw2017App')
-  .controller('MyCampaignsCtrl', ['$location', '$scope', 'CampaignService', function ( $location, $scope, CampaignService) {
+  .controller('MyCampaignsCtrl', ['$location', '$scope', 'CampaignService', 'UserService', function ( $location, $scope, CampaignService, UserService) {
 
     $scope.campaigns = [];
 
+    $scope.currentUser = {
+        email : "",
+        name : ""
+    }
+
     function initialize() {
-        CampaignService.reset();
-        CampaignService.getCampaigns().then(function (campaigns){
-            $scope.campaigns = campaigns;
-        });
+        if (UserService.isLoggedIn()) {
+            $scope.currentUser = UserService.currentUser();
+            CampaignService.reset();
+            CampaignService.getCampaigns($scope.currentUser.email).then(function (campaigns){
+                $scope.campaigns = campaigns;
+            });
+        }
+        else {
+            $location.path('/forbiddenAccess');
+        }
     }
 
     initialize();

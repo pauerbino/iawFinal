@@ -1,7 +1,7 @@
 'use strict';
 angular.module('iaw2017App')
-  .controller('NewContactCtrl', ['$location', '$scope', 'ContactService',
-    function ( $location, $scope, ContactService) {
+  .controller('NewContactCtrl', ['$location', '$scope', 'ContactService', 'UserService',
+    function ( $location, $scope, ContactService, UserService) {
 
         $scope.contact = {
             name: '',
@@ -11,20 +11,32 @@ angular.module('iaw2017App')
             tags: []
         };
 
+        $scope.currentUser = {
+            email : "",
+            name : ""
+        }
+
         $scope.userExist = false;
         $scope.newTag = '';
 
         $scope.newContact = function() {
-            if ($scope.newContactForm.$valid) {
-                ContactService.existContact($scope.contact).then(function(response){
-                    if (response) {
-                        $scope.userExist = true;
-                    } else {
-                        ContactService.createContact($scope.contact).then(function() {
-                            $location.path('/myContacts');
-                        });
-                    }
-                });
+            if (UserService.isLoggedIn()) {
+                $scope.currentUser = UserService.currentUser();
+                if ($scope.newContactForm.$valid) {
+                    ContactService.existContact($scope.contact).then(function(response){
+                        if (response) {
+                            $scope.userExist = true;
+                        } else {
+                            $scope.contact.userEmail = $scope.currentUser.email;
+                            ContactService.createContact($scope.contact).then(function() {
+                                $location.path('/myContacts');
+                            });
+                        }
+                    });
+                }
+            }
+            else {
+                $location.path('/forbiddenAccess');
             }
         };
 

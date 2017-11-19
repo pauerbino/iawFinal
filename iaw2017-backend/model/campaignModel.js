@@ -10,6 +10,7 @@ var CampaignSchema = Schema({
     participants : {type : Number, required: true},
     quantityOpened : {type : Number, default: 0, required: true},
     quantityLinked : {type : Number, default: 0, required: true},
+    user : { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 var Campaign = mongoose.model('Campaign', CampaignSchema );

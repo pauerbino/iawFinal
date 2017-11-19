@@ -99,6 +99,11 @@ angular
         controller: 'StatisticsCtrl',
         controllerAs: 'vm'
       })
+      .when('/forbiddenAccess', {
+        templateUrl: 'views/forbiddenAccess.html',
+        controller: 'ForbiddenAccessCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/home'
       });
