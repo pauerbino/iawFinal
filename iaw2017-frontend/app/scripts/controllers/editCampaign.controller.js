@@ -13,10 +13,20 @@ angular.module('iaw2017App')
         participants: 0
     };
 
+    $scope.campaignToSave = {
+        title: "",
+        subject: "",
+        from: "",
+        list: {},
+        content: "",
+        participants: 0
+    };
+
     function initialize() {
         ListService.getLists().then(function (lists){
             CampaignService.getCampaign($routeParams.id).then(function (campaign){
                 $scope.campaign = campaign;
+                $scope.campaignToSave = angular.copy(campaign);
                 $scope.selectedListId = campaign.list;
                 $scope.lists = lists;
             });
@@ -30,7 +40,8 @@ angular.module('iaw2017App')
             ListService.getList($scope.selectedListId).then(function(list) {
                 $scope.campaign.participants = list.contacts.length;
                 $scope.campaign.list = list;
-                CampaignService.editCampaign($scope.campaign).then(function(result) {
+                $scope.campaignToSave.title = $scope.campaign.title;
+                CampaignService.editCampaign($scope.campaignToSave).then(function(result) {
                     $location.path('/myCampaigns');
                 });
             });

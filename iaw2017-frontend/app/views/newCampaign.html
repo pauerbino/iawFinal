@@ -28,18 +28,21 @@
                     <a href="#!/newList" ng-click="">New List</a>
                     <p ng-show="newCampaignForm.to.$invalid && newCampaignForm.$submitted" class="help-block">This field is required.</p>
                 </div>
-
-                <div>
-                    <button type="submit" class="btn btn-warning btn-form" ng-click="newCampaign(campaign)"> Create </button>
-                    <button class="btn btn-default btn-form" ng-click="goBack()"> Back </button>
-                </div>
             </div>
 
             <div class="col-xs-6">
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea ng-model="campaign.content" class="form-control" name="content" rows="16" cols="50">
+                    <textarea ng-model="campaign.content" class="form-control" name="content" rows="12" cols="50">
                     </textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-warning btn-form" ng-click="newCampaign(campaign)"> Create and Send </button>
+                    <button class="btn btn-default btn-form" ng-click="goBack()"> Back </button>
                 </div>
             </div>
         </div>

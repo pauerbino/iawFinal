@@ -9,12 +9,12 @@
         var myPieChart = new Chart(ctxP, {
             type: 'pie',
             data: {
-                labels: ["No Abiertos", "Abiertos", "Linked"],
+                labels: ["No Abiertos", "Abiertos"],
                 datasets: [
                     {
                         data:window.data,
-                        backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C"],
-                        hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870"]
+                        backgroundColor: ["#F7464A", "#FDB45C"],
+                        hoverBackgroundColor: ["#FF5A5E", "#FFC870"]
                     }
                 ]
             },
