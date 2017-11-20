@@ -8,6 +8,7 @@ var CampaignSchema = Schema({
     list : { type: Schema.Types.ObjectId, ref: 'List' },
     mails : [{ type: Schema.Types.ObjectId, ref: 'Mail' }],
     content : {type : String, default: ''},
+    user : { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 var Campaign = mongoose.model('Campaign', CampaignSchema );

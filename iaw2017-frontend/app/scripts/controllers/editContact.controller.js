@@ -1,15 +1,26 @@
 'use strict';
 angular.module('iaw2017App')
-  .controller('EditContactCtrl', ['$location', '$routeParams', '$scope', 'ContactService',
-    function ( $location, $routeParams, $scope, ContactService) {
+  .controller('EditContactCtrl', ['$location', '$routeParams', '$scope', 'ContactService', 'UserService',
+    function ( $location, $routeParams, $scope, ContactService, UserService) {
 
         $scope.contact = {};
         $scope.newTag = '';
 
+        $scope.currentUser = {
+            email : "",
+            name : ""
+        }
+
         function initialize() {
-            ContactService.getContact($routeParams.id).then(function(response){
-                $scope.contact = response;
-            });
+             if (UserService.isLoggedIn()) {
+                $scope.currentUser = UserService.currentUser();
+                ContactService.getContact($routeParams.id, $scope.currentUser.email).then(function(response){
+                    $scope.contact = response;
+                });
+            }
+            else {
+                $location.path('/forbiddenAccess');
+            }
         }
 
         initialize();

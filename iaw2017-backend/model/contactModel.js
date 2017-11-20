@@ -6,7 +6,8 @@ var ContactSchema = Schema({
     lastName : {type : String, default: '', required: true},
     email : {type : String, default: '', required: true, unique: true},
     phone : {type : Number},
-    tags: [String]
+    tags: [String],
+    user : { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 var Contact = mongoose.model('Contact', ContactSchema );

@@ -1,21 +1,34 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var User = require('../model/userModel.js');
 var List = require('../model/listModel.js');
 
-
-router.get('/', function(req, res, next) {
-    List.find(function (err, lists) {
-        if (err) return next(err);
-        res.json(lists);
+router.get('/:email', function(req, res, next) {
+    User.find({"email": req.params.email}).exec(function(err,u) {
+        List.find({"user" : u}).populate('contacts').exec(function(err, list) {
+            if (err) return next(err);
+            res.json(list);
+        });
     });
+    //List.find(function (err, lists) {
+    //    if (err) return next(err);
+    //    res.json(lists);
+    //});
 });
 
-router.get('/:id', function(req, res, next) {
-    List.findById(req.params.id).populate('contacts').exec(function(err, list) {
-        if (err) return next(err);
-        res.json(list);
+router.get('/:id/:email', function(req, res, next) {
+   User.find({"email": req.params.email}).exec(function(err,u) {
+        List.find({"_id" : req.params.id, "user" : u}).populate('contacts').exec(function(err, list) {
+            if (err) return next(err);
+            res.json(list[0]);
+        });
     });
+
+  //  List.findById(req.params.id).populate('contacts').exec(function(err, list) {
+  //      if (err) return next(err);
+  //      res.json(list);
+  //  });
 });
 
 router.post('/', function(req, res, next) {
@@ -23,13 +36,17 @@ router.post('/', function(req, res, next) {
     for(var c of req.body.contacts) {
         contactsList.push(c._id);
     }
-    var newList = new List ({
-        name : req.body.name,
-        contacts : contactsList
-    });
-    newList.save(function(err) {
-        if (err) throw err;
-        res.json(newList);
+    User.find({"email": req.body.email}).exec(function(err,u) {
+        var newList = new List ({
+            name : req.body.name,
+            user : u[0]._id,
+            contacts : contactsList
+        });
+        console.log(newList);
+        newList.save(function(err) {
+            if (err) throw err;
+            res.json(newList);
+        });
     });
 });
 

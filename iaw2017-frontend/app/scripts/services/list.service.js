@@ -12,14 +12,14 @@ angular.module('iaw2017App')
             };
         };
 
-        service.getLists = function() {
+        service.getLists = function(email) {
             var deferred = $q.defer();
             if (cache.lists) {
                 deferred.resolve(cache.lists);
             } else {
                 $http({
                     method: 'GET',
-                    url: Configuration.getConfiguration().baseURL + '/lists'
+                    url: Configuration.getConfiguration().baseURL + '/lists/' + email
                 }).then(function (response) {
                     cache.lists = response.data;
                     deferred.resolve(response.data);
@@ -31,11 +31,11 @@ angular.module('iaw2017App')
             return deferred.promise;
         };
 
-        service.getList = function(id) {
+        service.getList = function(id, email) {
             var deferred = $q.defer();
             $http({
                 method: 'GET',
-                url: Configuration.getConfiguration().baseURL + '/lists/' + id
+                url: Configuration.getConfiguration().baseURL + '/lists/' + id + '/' + email
             }).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -80,6 +80,7 @@ angular.module('iaw2017App')
         };
 
         service.createList = function(list) {
+            console.log(list);
             var deferred = $q.defer();
             $http({
                 method : 'POST',

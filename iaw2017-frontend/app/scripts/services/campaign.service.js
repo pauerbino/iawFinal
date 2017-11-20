@@ -14,7 +14,7 @@ angular.module('iaw2017App')
             };
         };
 
-        service.getCampaigns = function() {
+        service.getCampaigns = function(email) {
             var deferred = $q.defer();
 
             if (cache.campaigns) {
@@ -22,7 +22,7 @@ angular.module('iaw2017App')
             } else {
                $http({
                     method: 'GET',
-                    url: Configuration.getConfiguration().baseURL + '/campaigns'
+                    url: Configuration.getConfiguration().baseURL + '/campaigns/' + email
                 }).then(function (response) {
                     cache.campaigns = response.data;
                     deferred.resolve(response.data);
@@ -34,11 +34,11 @@ angular.module('iaw2017App')
             return deferred.promise;
         };
 
-        service.getCampaign = function(id) {
+        service.getCampaign = function(id, email) {
             var deferred = $q.defer();
             $http({
                 method: 'GET',
-                url: Configuration.getConfiguration().baseURL + '/campaigns/' + id
+                url: Configuration.getConfiguration().baseURL + '/campaigns/' + id + '/' + email
             }).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {

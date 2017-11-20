@@ -8,12 +8,24 @@ angular.module('iaw2017App')
       password : ""
     };
 
+    $scope.message;
+
+    function initialize() {
+      $scope.message = "";
+    }
+
     $scope.register = function() {
         if ($scope.signinForm.$valid) {
-            UserService.register($scope.credentials).then(function(){
-              $location.path('/lists');
-            }).catch(function(res){
-                console.log(res);
+            UserService.register($scope.credentials).then(function(response){
+              if (response.error) {
+                console.log("error");
+                $scope.message = response.error;
+                console.log($scope.message);
+                $location.path('/signin');
+              }
+              else{
+                $location.path('/lists');
+              }
             });
         }
     };

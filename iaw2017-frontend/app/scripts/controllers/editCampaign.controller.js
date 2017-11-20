@@ -1,6 +1,6 @@
 'use strict';
 angular.module('iaw2017App')
-  .controller('EditCampaignCtrl', ['$location', '$routeParams', '$scope', 'CampaignService', 'ListService', function ( $location, $routeParams, $scope, CampaignService, ListService) {
+  .controller('EditCampaignCtrl', ['$location', '$routeParams', '$scope', 'CampaignService', 'ListService', 'UserService', function ( $location, $routeParams, $scope, CampaignService, ListService, UserService) {
 
     $scope.lists = [];
     $scope.selectedListId = '';
@@ -10,9 +10,9 @@ angular.module('iaw2017App')
         from: "",
         list: {},
         content: "",
-        participants: 0
+        participants: 0,
+        userEmail : ""
     };
-
     $scope.campaignToSave = {
         title: "",
         subject: "",
@@ -21,16 +21,26 @@ angular.module('iaw2017App')
         content: "",
         participants: 0
     };
+    $scope.currentUser = {
+        email : "",
+        name : ""
+    }
 
     function initialize() {
-        ListService.getLists().then(function (lists){
-            CampaignService.getCampaign($routeParams.id).then(function (campaign){
-                $scope.campaign = campaign;
-                $scope.campaignToSave = angular.copy(campaign);
-                $scope.selectedListId = campaign.list;
-                $scope.lists = lists;
+        if (UserService.isLoggedIn()) {
+            $scope.currentUser = UserService.currentUser();
+            ListService.getLists($scope.currentUser.email).then(function (lists){
+                CampaignService.getCampaign($routeParams.id, $scope.currentUser.email).then(function (campaign){
+                    $scope.campaign = campaign;
+                    $scope.campaignToSave = angular.copy(campaign);
+                    $scope.selectedListId = campaign.list;
+                    $scope.lists = lists;
+                });
             });
-        });
+        }
+        else {
+            $location.path('/forbiddenAccess');
+        }
     }
 
     initialize();
