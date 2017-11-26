@@ -5,7 +5,8 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
     email: { type: String, unique: true, required: true },
-  	name: { type: String, required: true },
+    name: { type: String, required: true },
+    premium: { type: Boolean, default: false },
   	hash: String,
   	salt: String
 });
@@ -20,10 +21,6 @@ UserSchema.methods.validPassword = function(password) {
   return this.hash === hash;
 };
 
-// UserSchema.methods.prueba = function(password) {
-//   console.log("anda ok el llamado a metodo");
-// };
-
 UserSchema.methods.generateJwt = function() {
   var expiry = new Date();
   expiry.setDate(expiry.getDate() + 7);
@@ -31,6 +28,7 @@ UserSchema.methods.generateJwt = function() {
   return jwt.sign({
     _id: this._id,
     email: this.email,
+    premium: this.premium,
     name: this.name,
     exp: parseInt(expiry.getTime() / 1000),
   }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!

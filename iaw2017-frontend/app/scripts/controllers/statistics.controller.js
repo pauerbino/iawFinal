@@ -4,17 +4,24 @@ angular.module('iaw2017App')
     function ( $location, $routeParams, $scope, $window, CampaignService, UserService) {
 
         $scope.campaign = {};
-        $window.data =[300, 600, 100];
         $scope.currentUser = {
             email : "",
             name : ""
         }
+        $window.data =[0, 0];
+        $scope.opened = 0;
 
         function initialize() {
             if (UserService.isLoggedIn()) {
                 $scope.currentUser = UserService.currentUser();
                 CampaignService.getCampaign($routeParams.id, $scope.currentUser.email).then(function (campaign){
                     $scope.campaign = campaign;
+                    for (var i = 0; i < campaign.mails.length; i++) {
+                        if (campaign.mails[i].open) {
+                            $scope.opened ++;
+                        }
+                    }
+                    $window.data = [ campaign.mails.length, $scope.opened]
                 });
             }
             else {

@@ -2,8 +2,13 @@
 1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
 1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
 1 verbose cli   'start' ]
+<<<<<<< HEAD
+2 info using npm@3.10.10
+3 info using node@v6.11.1
+=======
 2 info using npm@3.10.8
 3 info using node@v6.9.0
+>>>>>>> c4dd970be3eefa3b68b2d0b6564446973943f2ae
 4 verbose stack Error: missing script: start
 4 verbose stack     at run (C:\Program Files\nodejs\node_modules\npm\lib\run-script.js:151:19)
 4 verbose stack     at C:\Program Files\nodejs\node_modules\npm\lib\run-script.js:61:5
@@ -13,6 +18,15 @@
 4 verbose stack     at then (C:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:124:5)
 4 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:243:12
 4 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\graceful-fs\graceful-fs.js:78:16
+<<<<<<< HEAD
+4 verbose stack     at tryToString (fs.js:456:3)
+4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:443:12)
+5 verbose cwd C:\Users\paula\Desktop\ULTIMO\iawFinal\iaw2017-frontend
+6 error Windows_NT 10.0.15063
+7 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "start"
+8 error node v6.11.1
+9 error npm  v3.10.10
+=======
 4 verbose stack     at tryToString (fs.js:455:3)
 4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:442:12)
 5 verbose cwd C:\Users\joaquinpujol\Desktop\Facultad\LicenciaturaEnSistemas\IngenieriaDeAplicacionesWeb\Practica\FINAL\iawFinal\iaw2017-frontend
@@ -20,6 +34,7 @@
 7 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "start"
 8 error node v6.9.0
 9 error npm  v3.10.8
+>>>>>>> c4dd970be3eefa3b68b2d0b6564446973943f2ae
 10 error missing script: start
 11 error If you need help, you may report this error at:
 11 error     <https://github.com/npm/npm/issues>

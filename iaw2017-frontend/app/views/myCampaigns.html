@@ -7,14 +7,12 @@
       <tr>
           <th>Title</th>
           <th>Emails Opened</th>
-          <th>Links Opened</th>
           <th>Stadistics</th>
           <th>Options</th>
       </tr>
       <tr ng-repeat="campaign in campaigns">
         <td> {{campaign.title}} </td>
-        <td> {{(campaign.quantityOpened * 100) / campaign.participants | number:2}} % </td>
-        <td> {{(campaign.quantityLinked * 100) / campaign.participants | number:2}} % </td>
+        <td> {{}} % </td>
         <td> <a ng-click="goToStatistics(campaign._id)">Show statistics</a> </td>
         <td>
             <span class="glyphicon glyphicon-edit  edit-icon"  ng-click="editCampaign(campaign._id)"></span>
