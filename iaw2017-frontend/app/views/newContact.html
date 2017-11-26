@@ -1,5 +1,5 @@
 <h2 class="align-center"> New Contact </h2>
-<div class="alert alert-danger" role="alert" ng-show="userExist">
+<div class="alert alert-danger" role="alert" ng-show="userExist" name="validationError">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     The contact already exists
 </div>
@@ -40,11 +40,11 @@
                         <label for="tags">Etiquetas:</label>
                         <input type="text" class="form-control" name="tags" ng-model="newTag">
                         <div ng-repeat="tag in contact.tags" class="tag-container">
-                            <h3 class="label label-warning"> {{tag}} <span class="glyphicon glyphicon-remove" ng-click="removeTag(tag)"></span></h3>
+                            <h3 name="contactTag" class="label label-warning"> {{tag}} <span class="glyphicon glyphicon-remove" ng-click="removeTag(tag)"></span></h3>
                         </div>
                     </div>
                     <div class="col-xs-1">
-                        <h4 class="glyphicon glyphicon-ok add-icon" ng-click="addTag()"></h4>
+                        <h4 class="glyphicon glyphicon-ok add-icon" ng-click="addTag()" name="addTag"></h4>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
         <div class="row">
             <div class="col-xs-6">
                 <div>
-                    <button type="submit" class="btn btn-warning btn-form" ng-click="newContact()"> Create </button>
+                    <button type="submit" name="submit" class="btn btn-warning btn-form" ng-click="newContact()"> Create </button>
                     <button class="btn btn-default btn-form" ng-click="goBack()"> Back </button>
                 </div>
             </div>
