@@ -6,11 +6,14 @@ var List = require('../model/listModel.js');
 
 router.get('/:email', function(req, res, next) {
     User.find({"email": req.params.email}).exec(function(err,u) {
+        console.log(u);
         List.find({"user" : u}).populate('contacts').exec(function(err, list) {
+            console.log('entro en el get');
             if (err) return next(err);
             res.json(list);
         });
     });
+    //         console.log('paso por aca');
     //List.find(function (err, lists) {
     //    if (err) return next(err);
     //    res.json(lists);
@@ -24,7 +27,6 @@ router.get('/:id/:email', function(req, res, next) {
             res.json(list[0]);
         });
     });
-
   //  List.findById(req.params.id).populate('contacts').exec(function(err, list) {
   //      if (err) return next(err);
   //      res.json(list);

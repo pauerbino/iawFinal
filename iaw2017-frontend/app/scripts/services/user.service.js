@@ -26,6 +26,21 @@ angular.module('iaw2017App')
             }
         };
 
+        service.getPremium = function(email) {
+            var deferred = $q.defer();
+
+            $http({
+                method: 'GET',
+                url: Configuration.getConfiguration().baseURL + '/users/premium/' + email
+            }).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+
+            return deferred.promise;
+        };
+
         service.currentUser = function() {
 
             if(service.isLoggedIn()){
@@ -35,9 +50,25 @@ angular.module('iaw2017App')
                 payload = JSON.parse(payload);
                 return {
                     email : payload.email,
-                    name : payload.name
+                    name : payload.name,
+                    premium : payload.premium
                 };
             }
+        };
+
+        service.setPremium = function(body) {
+            var deferred = $q.defer();
+           $http({
+                method: 'PUT',
+                url: Configuration.getConfiguration().baseURL + '/users',
+                data: body
+            }).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (response) {
+                deferred.reject(response);
+            });
+
+            return deferred.promise;
         };
 
         service.register = function(user) {

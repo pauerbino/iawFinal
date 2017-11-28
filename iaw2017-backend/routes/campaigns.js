@@ -46,7 +46,6 @@ router.post('/', function(req, res, next) {
             list : req.body.list,
             mails : [],
             content : req.body.content,
-            participants : req.body.participants
             user : u[0]._id
         });
 

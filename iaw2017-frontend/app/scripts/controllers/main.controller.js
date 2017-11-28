@@ -10,4 +10,7 @@ angular.module('iaw2017App')
     $rootScope.$on('updateNavigation', initialize);
     initialize();
 
+    $scope.setPremium = function() {
+        $rootScope.$emit('bePremium');
+    };
   }]);

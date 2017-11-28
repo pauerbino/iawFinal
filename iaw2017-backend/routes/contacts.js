@@ -28,7 +28,9 @@ router.get('/:id/:email', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
+    console.log(req);
     User.find({"email": req.body.userEmail}).exec(function(err,u) {
+        console.log('entro');
         var newContact = new Contact ({
             name : req.body.name,
             lastName: req.body.lastName,
