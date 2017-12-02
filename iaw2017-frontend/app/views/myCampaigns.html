@@ -1,7 +1,7 @@
-<div class="campaigns">
+<div class="campaigns" id="campaigns">
     <div class="my-header">
         <h2 class="align-center margin-auto" > My Campaigns </h2>
-        <h3 class="glyphicon glyphicon-plus new-icon" aria-hidden="true" ng-click="goToNewCampaign()"></h3>
+        <h3 ng-if="campaigns.length < 3 || currentUser.premium" class="glyphicon glyphicon-plus new-icon" aria-hidden="true" ng-click="goToNewCampaign()"></h3>
     </div>
     <table class="table table-bordered">
       <tr>
@@ -20,4 +20,45 @@
         </td>
       </tr>
     </table>
-</div>
+    <div ng-show="!currentUser.premium">
+        <div id="paypal-button"> Be premium now!</div>
+    </div>
+</div >
+
+<script>
+    $( document ).ready(function() {
+                    // angular.element(document.getElementById('js-navbar-collapse')).scope().setPremium();
+         paypal.Button.render({
+
+            env: 'sandbox',
+            client: {
+                sandbox:    'AaexcTf1YLaokQ0wVax2oAbvlsvt2AucEXajnNkS5zzBb1Lb-HNaPIOLVf_jmqgxIY9S64z7l32-yRBa',
+                production: 'xxxxxxxxx'
+            },
+
+            commit: true, // Show a 'Pay Now' button
+
+            payment: function(data, actions) {
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                amount: { total: '1.00', currency: 'USD' }
+                            }
+                        ]
+                    }
+                });
+            },
+
+            onAuthorize: function(data, actions) {
+                return actions.payment.execute().then(function(payment) {
+                    angular.element(document.getElementById('js-navbar-collapse')).scope().setPremium();
+                    // The payment is complete!
+                    // You can now show a confirmation message to the customer
+                });
+            }
+
+        }, '#paypal-button');
+    });
+
+</script>

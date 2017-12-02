@@ -79,7 +79,7 @@ angular.module('iaw2017App')
             } else {
                $http({
                     method: 'GET',
-                    url: Configuration.getConfiguration().baseURL + '/contacts/' + email 
+                    url: Configuration.getConfiguration().baseURL + '/contacts/' + email
                 }).then(function (response) {
                     cache.contacts = response.data;
                     deferred.resolve(response.data);
@@ -122,6 +122,7 @@ angular.module('iaw2017App')
         };
 
         service.createContact = function (contact) {
+            console.log(contact);
             var deferred = $q.defer();
             $http({
                 method : 'POST',

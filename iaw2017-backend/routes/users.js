@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
 });
 
 //View my profile
-router.get('/:id', function(req, res, next) { 
+router.get('/:id', function(req, res, next) {
   userId = req.params.id;
   //if (!req.payload._id) {
   //  res.status(401).json({
@@ -37,9 +37,32 @@ router.get('/:id', function(req, res, next) {
   //}
 });
 
+
+router.get('/premium/:email', function(req, res, next) {
+    User.find({"email": req.params.email}).exec(function(err,u) {
+        if (err) throw er;
+        var body = {
+            premium: u[0].premium
+        }
+        res.json(body);
+    });
+});
+
+router.put('/', function(req, res, next) {
+    User.find({"email": req.body.email}).exec(function(err,u) {
+        if (err) throw er;
+        u[0].premium = true;
+        u[0].save(function(er) {
+            if (er) throw er;
+            res.json(u[0]);
+        });
+    });
+});
+
+
 //Log in
 router.post('/', function(req, res, next) {
-  
+
   // if(!req.body.email || !req.body.password) {
   //   sendJSONresponse(res, 400, {
   //     "message": "All fields required"
@@ -57,7 +80,12 @@ router.post('/', function(req, res, next) {
       return;
     }
     console.log(user);
-    // If a user is found
+
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+    // res.redirect('/users/' + req.user.username);
+
+    // If a user is founds
     if(user){
       token = user.generateJwt();
       res.status(200);
