@@ -12,14 +12,15 @@ angular.module('iaw2017App')
             };
         };
 
-        service.getLists = function(email) {
+        service.getLists = function(email, token) {
             var deferred = $q.defer();
             if (cache.lists) {
                 deferred.resolve(cache.lists);
             } else {
                 $http({
                     method: 'GET',
-                    url: Configuration.getConfiguration().baseURL + '/lists/' + email
+                    url: Configuration.getConfiguration().baseURL + '/lists/' + email,
+                    headers: {'x-access-token': token}
                 }).then(function (response) {
                     cache.lists = response.data;
                     deferred.resolve(response.data);
@@ -31,11 +32,12 @@ angular.module('iaw2017App')
             return deferred.promise;
         };
 
-        service.getList = function(id, email) {
+        service.getList = function(id, email, token) {
             var deferred = $q.defer();
             $http({
                 method: 'GET',
-                url: Configuration.getConfiguration().baseURL + '/lists/' + id + '/' + email
+                url: Configuration.getConfiguration().baseURL + '/lists/' + id + '/' + email,
+                headers: {'x-access-token': token}
             }).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -45,12 +47,13 @@ angular.module('iaw2017App')
             return deferred.promise;
         };
 
-        service.deleteList = function(id) {
+        service.deleteList = function(id, token) {
             var deferred = $q.defer();
 
             $http({
                 method: 'DELETE',
-                url: Configuration.getConfiguration().baseURL + '/lists/' + id
+                url: Configuration.getConfiguration().baseURL + '/lists/' + id,
+                headers: {'x-access-token': token}
             }).then(function (response) {
                 deferred.resolve(response.data);
             }).catch(function (response) {
@@ -64,11 +67,12 @@ angular.module('iaw2017App')
 
         };
 
-        service.editList = function(list) {
+        service.editList = function(list, token) {
             var deferred = $q.defer();
            $http({
                 method: 'PUT',
                 url: Configuration.getConfiguration().baseURL + '/lists/' + list._id,
+                headers: {'x-access-token': token},
                 data: list
             }).then(function (response) {
                 deferred.resolve(response.data);
@@ -79,12 +83,13 @@ angular.module('iaw2017App')
             return deferred.promise;
         };
 
-        service.createList = function(list) {
+        service.createList = function(list, token) {
             console.log(list);
             var deferred = $q.defer();
             $http({
                 method : 'POST',
                 url : Configuration.getConfiguration().baseURL + '/lists',
+                headers: {'x-access-token': token},
                 data: list
             }).then(function(response) {
                 deferred.resolve(response);

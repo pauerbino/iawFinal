@@ -13,7 +13,8 @@ angular.module('iaw2017App')
     function initialize() {
         if (UserService.isLoggedIn()) {
             $scope.currentUser = UserService.currentUser();
-            ListService.getList($routeParams.id, $scope.currentUser.email).then(function (list){
+            var token = UserService.getToken();
+            ListService.getList($routeParams.id, $scope.currentUser.email, token).then(function (list){
                 $scope.list = list;
                 console.log($scope.list);
             });
@@ -26,7 +27,7 @@ angular.module('iaw2017App')
     initialize();
 
     $scope.deleteList = function() {
-        ListService.deleteList($routeParams.id).then(function (){
+        ListService.deleteList($routeParams.id, UserService.getToken()).then(function (){
             $location.path('/lists');
         });
     };
@@ -36,7 +37,7 @@ angular.module('iaw2017App')
     };
 
     $scope.deleteContactFromList = function(id) {
-        ListService.deleteContactFromList($routeParams.id, id).then(function (){
+        ListService.deleteContactFromList($routeParams.id, id, UserService.getToken()).then(function (){
             initialize();
         });
     };

@@ -7,12 +7,12 @@ angular.module('iaw2017App')
             $window.localStorage['mean-token'] = token;
         }
 
-        function getToken () {
+        service.getToken = function() {
             return $window.localStorage['mean-token'];
         }
 
         service.isLoggedIn = function() {
-            var token = getToken();
+            var token = service.getToken();
             var payload;
 
             if(token){
@@ -44,7 +44,7 @@ angular.module('iaw2017App')
         service.currentUser = function() {
 
             if(service.isLoggedIn()){
-                var token = getToken();
+                var token = service.getToken();
                 var payload = token.split('.')[1];
                 payload = $window.atob(payload);
                 payload = JSON.parse(payload);
@@ -118,7 +118,7 @@ angular.module('iaw2017App')
         service.getProfile = function () {
             return $http.get('/api/profile', {
                 headers: {
-                    Authorization: 'Bearer '+ getToken()
+                    Authorization: 'Bearer '+ service.getToken()
             }
             });
         };
