@@ -17,14 +17,15 @@ angular.module('iaw2017App')
                 ContactService.reset();
                 ContactService.getContacts($scope.currentUser.email).then(function(response){
                     $scope.allContacts = response;
-                });
-                ListService.getList($routeParams.id, $scope.currentUser.email, UserService.getToken()).then(function(response){
-                    $scope.list = response;
-                    for (var i = 0; i < $scope.allContacts.length; i++) {
-                        if (isIncluded($scope.allContacts[i])) {
-                            $scope.allContacts[i].checked = true;
+                    ListService.getList($routeParams.id, $scope.currentUser.email).then(function(response){
+                        $scope.list = response;
+                        for (var i = 0; i < $scope.allContacts.length; i++) {
+                            if (isIncluded($scope.allContacts[i])) {
+                                console.log($scope.allContacts[i]);
+                                $scope.allContacts[i].checked = true;
+                            }
                         }
-                    }
+                    });
                 });
             }
             else {
@@ -42,7 +43,7 @@ angular.module('iaw2017App')
             });
             $scope.list.contacts = contactsSelected;
             $scope.list.email = $scope.currentUser.email;
-            ListService.editList($scope.list, UserService.getToken()).then(function() {
+            ListService.editList($scope.list).then(function() {
                 $location.path('/contactList/'+$routeParams.id);
             });
         };
